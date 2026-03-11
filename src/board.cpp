@@ -2,10 +2,19 @@
 #include <memory>
 #include <iostream>
 
-Board::Board(int width, int height)
-{
-    // Implement your code here
-}
+/**
+ * Constructor de la classe Board
+ * Asigna a m_width i m_height el width i height que es reben. 
+ * Crea una matriu amb height files i width columnes, on cada cel·la s'inicialitza amb nullptr (buit)
+ * @param width Nombre de columnes del tauler
+ * @param height Nombre de files del tauler
+ */
+Board::Board(int width, int height) 
+    : m_width(width), 
+      m_height(height),
+      m_cells(height, std::vector<Candy*>(width, nullptr)) 
+{}
+
 
 Board::~Board()
 {
@@ -27,15 +36,13 @@ void Board::setCell(Candy* candy, int x, int y)
 
 int Board::getWidth() const
 {
-    // Implement your code here
-    return -1;
+    return m_width;
 }
 
 
 int Board::getHeight() const
 {
-    // Implement your code here
-    return -1;
+    return m_height;
 }
 
 bool Board::shouldExplode(int x, int y) const
