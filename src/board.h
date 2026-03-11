@@ -1,5 +1,10 @@
 /**
- * Game and pieces for the game.
+ * FITXER board.
+ * AUTORS Alan Tchertchessov i Samir Channagui
+ * DATA 11/03/2026
+ * VERSIO 1.0
+ * Tauler de punters a Candy amb accés per coordenades, detecció i 
+ * explosió de linies, i guardat/carrega a fitxer
  */
 #ifndef BOARD_H
 #define BOARD_H
@@ -88,8 +93,16 @@ public:
     int getHeight() const;
 
 private:
+    /// Guarda l'amplada del tauler
+    int m_width;
+    /// Guarda l'alçada del tauler
+    int m_height;
 
-    /// Students can add as many protected methods and attributes as needed.
+    /**
+     * Vector de files (matriu), on cada fila es un vector de punters a Candy. 
+     * Cada punter pot apuntar a un Candy (cel·la ocupada) o ser nullptr (cel·la buida)
+    */ 
+    std::vector<std::vector<Candy*>> m_cells;
 };
 
 #endif
