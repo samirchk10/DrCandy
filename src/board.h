@@ -98,11 +98,8 @@ private:
     /// Guarda l'alçada del tauler
     int m_height;
 
-    /**
-     * Vector de files (matriu), on cada fila es un vector de punters a Candy. 
-     * Cada punter pot apuntar a un Candy (cel·la ocupada) o ser nullptr (cel·la buida)
-    */ 
-    std::vector<std::vector<Candy*>> m_cells;
+    // Array de punteros a Candy, 
+    Candy* m_cells[DEFAULT_BOARD_HEIGHT][DEFAULT_BOARD_WIDTH];
 };
 
 #endif

@@ -2,35 +2,49 @@
 #include <memory>
 #include <iostream>
 
-/**
- * Constructor de la classe Board
- * Asigna a m_width i m_height el width i height que es reben. 
- * Crea una matriu amb height files i width columnes, on cada cel·la s'inicialitza amb nullptr (buit)
- * @param width Nombre de columnes del tauler
- * @param height Nombre de files del tauler
- */
-Board::Board(int width, int height) 
-    : m_width(width), 
-      m_height(height),
-      m_cells(height, std::vector<Candy*>(width, nullptr)) 
-{}
+
+Board::Board(int width, int height) : m_width(width), m_height(height) 
+{
+    // Inicializamos los punteros del arraya. nullptr, sino tendrian valores basura aleatorios.
+    // Con nullptr nos aseguramos de que sean celdas vacias
+    for (int y = 0; y < m_height; y++)
+    {
+        for (int x = 0; x < m_width; x++)
+        {
+            m_cells[y][x] = nullptr;
+        }
+    }
+}
 
 
 Board::~Board()
 {
-    // Implement your code here
+    // Con memoria estatica no hace falta implementar nada, los arrays se destruyen solos al salir de su "ambito"
 }
 
 
 Candy* Board::getCell(int x, int y) const
 {
-    // Implement your code here
-    return nullptr;
+    // Si las coordenadas estan fuera del tablero, devolver nullptr
+    if (x < 0 || x >= m_width || y < 0 || y >= m_height)
+    {
+        return nullptr;
+    }
+
+    // Devuelve Candy* (la dirección de memoria) de las coordenadas dadas
+    return m_cells[y][x];
 }
+
 
 void Board::setCell(Candy* candy, int x, int y)
 {
-    // Implement your code here
+    if (x < 0 || x >= m_width || y < 0 || y >= m_height)
+    {
+        return; // Si se cumple el if, se sale de la función inmediatamente
+    }
+
+    // candy ya es un puntero, ya que tenemos "Candy* candy" como parametro
+    m_cells[y][x] = candy;
 }
 
 
@@ -45,11 +59,13 @@ int Board::getHeight() const
     return m_height;
 }
 
+
 bool Board::shouldExplode(int x, int y) const
 {
     // Implement your code here
     return false;
 }
+
 
 std::vector<Candy*> Board::explodeAndDrop()
 {
@@ -57,11 +73,13 @@ std::vector<Candy*> Board::explodeAndDrop()
     return {};
 }
 
+
 bool Board::dump(const std::string& output_path) const
 {
     // Implement your code here
     return false;
 }
+
 
 bool Board::load(const std::string& input_path)
 {
