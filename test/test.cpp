@@ -16,6 +16,28 @@ bool test()
         return false;
     }
 
+    // Test dimensiones por defecto
+    {
+        Board b1;
+        
+        if (b1.getWidth() != DEFAULT_BOARD_WIDTH || b1.getHeight() != DEFAULT_BOARD_HEIGHT)
+        {
+            return false;
+        }
+    }
+
+    // Test dimensiones personalizadas
+    {
+        Board b3(5, 7);
+
+        if (b3.getWidth() != 5 || b3.getHeight() != 7)
+        {
+            return false;
+        }
+    }
+
+    
+
     // Dump and load board
     {
         Board b2(10, 10);
