@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+
+# Visual Studio Windows
+.vs/
+*.suo
+*.user
+*.ipch
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+
+# Ficheros de compilación
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.log
+*.tlog
+*.idb
+*.lastbuildstate
+*.recipe
+
+# Semantyc symbols
+SemanticSymbol*
+76e3fe83*
+Browse.VC*
+CodeChunks*
+DocumentLayout*
+
+# PDF personals
+slides_practica_*.pdf
