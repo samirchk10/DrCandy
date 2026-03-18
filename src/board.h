@@ -98,8 +98,11 @@ private:
     /// Guarda l'alçada del tauler
     int m_height;
 
-    // Array de punteros a Candy, 
-    Candy* m_cells[DEFAULT_BOARD_HEIGHT][DEFAULT_BOARD_WIDTH];
+    // Array de punteros a Candy 2D
+    //Candy* m_cells[DEFAULT_BOARD_HEIGHT][DEFAULT_BOARD_WIDTH];
+    
+    // Vector 2D de Candy*
+    std::vector<std::vector<Candy*>> m_cells;
 };
 
 #endif

@@ -5,21 +5,14 @@
 
 Board::Board(int width, int height) : m_width(width), m_height(height) 
 {
-    // Inicializamos los punteros del arraya. nullptr, sino tendrian valores basura aleatorios.
-    // Con nullptr nos aseguramos de que sean celdas vacias
-    for (int y = 0; y < m_height; y++)
-    {
-        for (int x = 0; x < m_width; x++)
-        {
-            m_cells[y][x] = nullptr;
-        }
-    }
+    // vector m_cells amb height files y cada fila un vector de width nullptrs de tipus Candy*
+    m_cells.resize(height, std::vector<Candy*>(width, nullptr));
 }
 
 
 Board::~Board()
 {
-    // Con memoria estatica no hace falta implementar nada, los arrays se destruyen solos al salir de su "ambito"
+    // Con memoria estatica no hace falta implementar nada, los vectores se destruyen solos al salir de su "ambito"
 }
 
 
@@ -62,7 +55,11 @@ int Board::getHeight() const
 
 bool Board::shouldExplode(int x, int y) const
 {
-    // Implement your code here
+    if (m_cells[y][x] == nullptr)
+    {
+        return false;
+    }
+
     return false;
 }
 
