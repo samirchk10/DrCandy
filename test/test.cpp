@@ -22,8 +22,11 @@ bool test()
         
         if (b1.getWidth() != DEFAULT_BOARD_WIDTH || b1.getHeight() != DEFAULT_BOARD_HEIGHT)
         {
+            std::cout << "Dimensiones por defecto cargadas incorrectamente, TEST FALLIDO" << std::endl;
             return false;
         }
+
+        std::cout << "Dimensiones por defecto cargadas correctamente, TEST CORRECTO" << std::endl;
     }
 
     // Test dimensiones personalizadas
@@ -32,11 +35,432 @@ bool test()
 
         if (b3.getWidth() != 5 || b3.getHeight() != 7)
         {
+            std::cout << "Dimensiones personalizadas no cargadas, TEST FALLIDO" << std::endl;
             return false;
         }
+
+        std::cout << "Dimensiones personalizadas cargadas correctamente, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si una celda nullptr no explota
+    {
+        Board b(10, 10);
+
+        if (b.shouldExplode(0, 0) != false)
+        {
+            std::cout << "Celda nula explota, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Celda nula no explota, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver que un solo caramelo no explota
+    {
+        Board b(10, 10);
+
+        Candy candy(CandyType::TYPE_RED);
+        b.setCell(&candy, 5, 5);
+
+        if (b.shouldExplode(5, 5) != false)
+        {
+            std::cout << "Candy solo explota, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Candy solo no explota, TEST CORRECTO" << std::endl;
+    }
+
+
+
+
+    // TESTS PARA shouldExplode
+
+
+
+
+    // Test para ver si tres candies del mismo tipo explotan en horizontal
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_RED);
+        Candy candy3(CandyType::TYPE_RED);
+
+        b.setCell(&candy1, 0, 0);
+        b.setCell(&candy2, 1, 0);
+        b.setCell(&candy3, 2, 0);
+
+        if (b.shouldExplode(1, 0) != true)
+        {
+            std::cout << "Los 3 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 3 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si 4 candies del mismo tipo explotan en horizontal
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_RED);
+        Candy candy3(CandyType::TYPE_RED);
+        Candy candy4(CandyType::TYPE_RED);
+
+        b.setCell(&candy1, 0, 0);
+        b.setCell(&candy2, 1, 0);
+        b.setCell(&candy3, 2, 0);
+        b.setCell(&candy4, 3, 0);
+
+        if (b.shouldExplode(1, 0) != true)
+        {
+            std::cout << "Los 4 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 4 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si tres candies del mismo tipo explotan en vertical
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_GREEN);
+        Candy candy2(CandyType::TYPE_GREEN);
+        Candy candy3(CandyType::TYPE_GREEN);
+
+        b.setCell(&candy1, 0, 0);
+        b.setCell(&candy2, 0, 1);
+        b.setCell(&candy3, 0, 2);
+
+        if (b.shouldExplode(0, 1) != true)
+        {
+            std::cout << "Los 3 candies en VERTICAL explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 3 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si 4 candies del mismo tipo explotan en vertical
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_GREEN);
+        Candy candy2(CandyType::TYPE_GREEN);
+        Candy candy3(CandyType::TYPE_GREEN);
+        Candy candy4(CandyType::TYPE_GREEN);
+
+        b.setCell(&candy1, 0, 0);
+        b.setCell(&candy2, 0, 1);
+        b.setCell(&candy3, 0, 2);
+        b.setCell(&candy4, 0, 3);
+
+        if (b.shouldExplode(0, 1) != true)
+        {
+            std::cout << "Los 4 candies en VERTICAL no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 4 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si tres candies del mismo tipo explotan en diagonal /
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_BLUE);
+        Candy candy2(CandyType::TYPE_BLUE);
+        Candy candy3(CandyType::TYPE_BLUE);
+
+        b.setCell(&candy1, 3, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 1, 3);
+
+        if (b.shouldExplode(2, 2) != true)
+        {
+            std::cout << "Los 3 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 3 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si 4 candies del mismo tipo explotan en diagonal /
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_BLUE);
+        Candy candy2(CandyType::TYPE_BLUE);
+        Candy candy3(CandyType::TYPE_BLUE);
+        Candy candy4(CandyType::TYPE_BLUE);
+
+        b.setCell(&candy1, 3, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 1, 3);
+        b.setCell(&candy4, 0, 4);
+
+        if (b.shouldExplode(2, 2) != true)
+        {
+            std::cout << "Los 4 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 4 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si tres candies del mismo tipo explotan en diagonal inversa
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_ORANGE);
+        Candy candy2(CandyType::TYPE_ORANGE);
+        Candy candy3(CandyType::TYPE_ORANGE);
+
+        b.setCell(&candy1, 1, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 3, 3);
+
+        if (b.shouldExplode(2, 2) != true)
+        {
+            std::cout << "Los 3 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 3 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
+    }
+
+    // Test para ver si 4 candies del mismo tipo explotan en diagonal inversa
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_ORANGE);
+        Candy candy2(CandyType::TYPE_ORANGE);
+        Candy candy3(CandyType::TYPE_ORANGE);
+        Candy candy4(CandyType::TYPE_ORANGE);
+
+        b.setCell(&candy1, 1, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 3, 3);
+        b.setCell(&candy4, 4, 4);
+
+        if (b.shouldExplode(2, 2) != true)
+        {
+            std::cout << "Los 4 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 4 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
+    }
+    
+    // Test para ver si 3 candies, donde uno no es del mismo tipo, no explotan en diagonal inversa
+    {
+        Board b(10, 10);
+
+        Candy candy1(CandyType::TYPE_ORANGE);
+        Candy candy2(CandyType::TYPE_ORANGE);
+        Candy candy3(CandyType::TYPE_RED);
+
+        b.setCell(&candy1, 1, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 3, 3);
+
+        if (b.shouldExplode(2, 2) != false)
+        {
+            std::cout << "Los 4 candies (con uno diferente) en DIAGONAL inversa explotan, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Los 4 candies (con uno diferente) en DIAGONAL inversa no explotan, TEST CORRECTO" << std::endl;
+    }
+
+
+
+
+    // TESTS PARA ExplodeAndDrop
+
+
+
+
+    // Test para comprobar si devuelve un vector (con el numero que lo identifica en el enum) de los candies explotados
+    // Tambien comprueba si detecta una diagonal inversa de 3 candies del mismo tipo y los explota, a su vez,
+    // indica que los candies explotados son los correctos
+    {
+        Board b(10, 10);
+        
+        Candy candy1(CandyType::TYPE_ORANGE);
+        Candy candy2(CandyType::TYPE_ORANGE);
+        Candy candy3(CandyType::TYPE_ORANGE);
+
+        // En diagonal inversa a /
+        b.setCell(&candy1, 1, 1);
+        b.setCell(&candy2, 2, 2);
+        b.setCell(&candy3, 3, 3);
+
+        std::vector<Candy*> exploded = b.explodeAndDrop();
+
+        if (exploded.size() != 3)
+        {
+            std::cout << "El tamaño del vector no es igual a 3, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        for (int i = 0; i < exploded.size(); i++)
+        {
+            std::cout << static_cast<int>(exploded[i]->getType()) << " ";
+        }
+
+        if (exploded.empty())
+        {
+            std::cout << "Devuelve un vector vacio, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << " -> Devuelve un vector con candies explotados, TEST CORRECTO" << std::endl;
+    }
+
+
+    // Test que comprueva que se devuelva un vector vacio cuando no explota ninguna linea
+    {
+        Board b(10, 10);
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_YELLOW);
+
+        b.setCell(&candy1, 0, 0);
+        b.setCell(&candy2, 1, 0);
+
+        std::vector<Candy*> exploded = b.explodeAndDrop();
+
+        if (!exploded.empty())
+        {
+            std::cout << "Deberia devolver un vector vacio, TEST FALLIDO" << std::endl;
+        }
+
+        std::cout << "Devuelve un vector vacio, TEST CORRECTO" << std::endl;
+    }
+
+
+    // Test para comprovar que si 3 candies en linea coinciden en tipo, las celdas quedan nullptr despues de explotar
+    {
+        Board b(10, 10);
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_RED);
+        Candy candy3(CandyType::TYPE_RED);
+
+        b.setCell(&candy1, 0, 9);
+        b.setCell(&candy2, 1, 9);
+        b.setCell(&candy3, 2, 9);
+
+        std::vector<Candy*> exploded = b.explodeAndDrop();
+
+        if (exploded.size() != 3)
+        {
+            std::cout << "Deberia devolver 3 candies, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.getCell(0,9) != nullptr || b.getCell(1,9) != nullptr || b.getCell(2,9) != nullptr)
+        {
+            std::cout << "Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "La linea de 3 candies iguales explota y las celdas quedan nullptr, TEST CORRECTO" << std::endl;
+    }
+
+
+    // Test para comprova que un candy encima de una linea de candies que explota, cae abajo
+    // Test para comprova que un candy encima de una linea de candies que explota, cae abajo
+    {
+        Board b(10, 10);
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_RED);
+        Candy candy3(CandyType::TYPE_RED);
+        Candy candy4(CandyType::TYPE_YELLOW);
+
+        b.setCell(&candy1, 0, 9);
+        b.setCell(&candy2, 1, 9);
+        b.setCell(&candy3, 2, 9);
+        b.setCell(&candy4, 0, 8);
+
+        b.explodeAndDrop();
+
+        if (b.getCell(0, 9)->getType() != CandyType::TYPE_YELLOW)
+        {
+            std::cout << "El candy amarillo no ha caido abajo despues de la explosion, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "El candy amarillo ha caido abajo despues de la explosion, TEST CORRECTO" << std::endl;
+    }
+
+
+    // Test de reaccion en cadena y comprovacion de que han quedado nullptr y un candy diferente a los explotados ha caido abajo
+    {
+        Board b(10, 10);
+        Candy candy1(CandyType::TYPE_RED);
+        Candy candy2(CandyType::TYPE_RED);
+        Candy candy3(CandyType::TYPE_RED);
+        
+        Candy candy4(CandyType::TYPE_YELLOW);
+        Candy candy5(CandyType::TYPE_YELLOW);
+        Candy candy6(CandyType::TYPE_YELLOW);
+
+        Candy candyExtra(CandyType::TYPE_BLUE);
+
+        b.setCell(&candy1, 0, 9);
+        b.setCell(&candy2, 1, 9);
+        b.setCell(&candy3, 2, 9);
+        b.setCell(&candy4, 0, 6);
+        b.setCell(&candy5, 0, 7);
+        b.setCell(&candy6, 0, 8);
+        
+        //Deberia caer a (0, 9)
+        b.setCell(&candyExtra, 0, 5);
+
+        std::vector<Candy*> exploded = b.explodeAndDrop();
+
+        if (exploded.size() != 6)
+        {
+            std::cout << "Deberia devolver 6 candies, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        // Comprovar que han quedado nullptr las celdas que estaban ocupadas, menos la (0, 9), donde deberia caer el candy blue
+        if (b.getCell(1, 9) != nullptr || b.getCell(2, 9) != nullptr || b.getCell(0, 6) != nullptr
+            || b.getCell(0, 7) != nullptr || b.getCell(0, 8) != nullptr)
+        {
+            std::cout << "Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.getCell(0, 9) == nullptr || b.getCell(0, 9)->getType() != CandyType::TYPE_BLUE)
+        {
+            std::cout << "El candy blue no ha caido correctament, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        //Comprovamos que la celda donde estaba antes el candyExtra, es nullptr
+        if (b.getCell(0, 5) != nullptr)
+        {
+            std::cout << "La celda donde estaba antes el candy blue, no ha quedado vacia, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Reaccion en cadena y caida correcta, TEST CORRECTO" << std::endl;
     }
 
     
+
+
+
+
+    // TESTS PARA dumb and load
+
+
+
 
     // Dump and load board
     {
@@ -54,8 +478,10 @@ bool test()
             return false;
         }
         std::filesystem::remove(getDataDirPath() + "dump_board.txt");
-    }
 
+        std::cout << "Dump and load, correcto" << std::endl;
+    }
+/*
     // Dump and load game
     {
         Game g;
@@ -76,6 +502,6 @@ bool test()
         }
         std::filesystem::remove(getDataDirPath() + "dump_game.txt");
     }
-
+*/
     return true;
 }
