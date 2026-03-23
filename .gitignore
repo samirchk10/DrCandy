@@ -3,6 +3,9 @@
 .DS_Store?
 ._*
 
+build/
+CMakeCache.txt
+
 # Visual Studio Windows
 .vs/
 *.suo

@@ -397,7 +397,7 @@ bool test()
     }
 
 
-    // Test de reaccion en cadena y comprovacion de que han quedado nullptr y un candy diferente a los explotados ha caido abajo
+    // Test de reaccion en cadena, comprovacion de que han quedado nullptr y un candy diferente a los explotados ha caido abajo
     {
         Board b(10, 10);
         Candy candy1(CandyType::TYPE_RED);
@@ -428,7 +428,8 @@ bool test()
             return false;
         }
 
-        // Comprovar que han quedado nullptr las celdas que estaban ocupadas, menos la (0, 9), donde deberia caer el candy blue
+        // Comprovar que han quedado nullptr las celdas que estaban ocupadas, menos la (0, 9), donde deberia caer el candy blue 
+        // y la (0, 5) que se comprueba despues
         if (b.getCell(1, 9) != nullptr || b.getCell(2, 9) != nullptr || b.getCell(0, 6) != nullptr
             || b.getCell(0, 7) != nullptr || b.getCell(0, 8) != nullptr)
         {
@@ -451,8 +452,107 @@ bool test()
 
         std::cout << "Reaccion en cadena y caida correcta, TEST CORRECTO" << std::endl;
     }
-
     
+
+
+
+    // TESTS PARA typeToChar
+
+
+
+
+    // Test que comprueba la correspondencia de tipo de candy a la letra inicial que respresenta el tipo
+    {
+        Board b(10, 10);
+
+        if (b.typeToChar(CandyType::TYPE_RED) != 'R')
+        {
+            std::cout << "typeToChar TYPE_RED falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.typeToChar(CandyType::TYPE_BLUE) != 'B')
+        {
+            std::cout << "typeToChar TYPE_BLUE falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.typeToChar(CandyType::TYPE_GREEN) != 'G')
+        {
+            std::cout << "typeToChar TYPE_GREEN falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.typeToChar(CandyType::TYPE_YELLOW) != 'Y')
+        {
+            std::cout << "typeToChar TYPE_YELLOW falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.typeToChar(CandyType::TYPE_PURPLE) != 'P')
+        {
+            std::cout << "typeToChar TYPE_PURPLE falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.typeToChar(CandyType::TYPE_ORANGE) != 'O')
+        {
+            std::cout << "typeToChar TYPE_ORANGE falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Todas las comprobaciones de typeToChar son correctas, TEST CORRECTO" << std::endl;
+    }
+
+
+
+
+    // TESTS PARA charToType
+
+
+
+
+    {
+        Board b(10, 10);
+
+        if (b.charToType('R') != CandyType::TYPE_RED)
+        {
+            std::cout << "charToType (R) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.charToType('B') != CandyType::TYPE_BLUE)
+        {
+            std::cout << "charToType (B) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.charToType('G') != CandyType::TYPE_GREEN)
+        {
+            std::cout << "charToType (G) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.charToType('Y') != CandyType::TYPE_YELLOW)
+        {
+            std::cout << "charToType (Y) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.charToType('P') != CandyType::TYPE_PURPLE)
+        {
+            std::cout << "charToType (P) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        if (b.charToType('O') != CandyType::TYPE_ORANGE)
+        {
+            std::cout << "charToType (O) falla, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Todas las comprobaciones de charToType son correctas, TEST CORRECTO" << std::endl;
+    }
 
 
 
@@ -481,7 +581,8 @@ bool test()
 
         std::cout << "Dump and load, correcto" << std::endl;
     }
-/*
+
+
     // Dump and load game
     {
         Game g;
@@ -502,6 +603,6 @@ bool test()
         }
         std::filesystem::remove(getDataDirPath() + "dump_game.txt");
     }
-*/
+
     return true;
 }
