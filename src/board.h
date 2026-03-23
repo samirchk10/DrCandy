@@ -1,7 +1,7 @@
 /**
  * FITXER board.h
  * AUTORS Alan Tchertchessov i Samir Channagui
- * DATA 24/03/2026
+ * DATA 23/03/2026
  * Declaración de la clase Board. Define la estructura del tablero de
  * punteros Candy, las constantes (dimensiones, direcciones,
  * minimo de explosion) y la interfaz publica para acceder, modificar,
@@ -17,14 +17,14 @@
 
 #include "candy.h"
 
-/// Dimensiones por defecto de Board
+// Dimensiones por defecto de Board
 const int DEFAULT_BOARD_WIDTH = 10;
 const int DEFAULT_BOARD_HEIGHT = 10;
 
-/// Numero de candies del mismot ipo que se necesitan para explotar en horizontal, vertical o diagonal
+// Numero de candies del mismot ipo que se necesitan para explotar en horizontal, vertical o diagonal
 const int SHORTEST_EXPLOSION_LINE = 3;
 
-/// Estado inicial del contador de tipos de Candy correspondientes
+// Estado inicial del contador de tipos de Candy correspondientes
 const int INITIAL_COUNT = 1;
 
 // Dirreciones en las que realizar la busqueda de Candys de mismo tipo: stepX, stepY
@@ -43,10 +43,10 @@ const int DIAGONAL_L[2] = {1, 1};
 class Board
 {
 public:
-    /// Inicializa un tablero con las dimensiones dadas
+    // Inicializa un tablero con las dimensiones dadas
     Board(int width = DEFAULT_BOARD_WIDTH, int height = DEFAULT_BOARD_HEIGHT);
 
-    /// Libera todos los recursos manejados por Board
+    // Libera todos los recursos manejados por Board
     ~Board();
 
     /**
@@ -116,10 +116,10 @@ public:
      */
     CandyType charToType(char c) const;
 
-    /// Obtener el ancho del tablero
+    // Obtener el ancho del tablero
     int getWidth() const;
 
-    /// Obtener la altura del tablero
+    // Obtener la altura del tablero
     int getHeight() const;
 
     /**
@@ -136,10 +136,10 @@ public:
 
 
 private:
-    /// Guarda el ancho del tablero
+    // Guarda el ancho del tablero
     int m_width;
     
-    /// Guarda la altura del tablero
+    // Guarda la altura del tablero
     int m_height;
     
     // Vector 2D de punteros de Candy
