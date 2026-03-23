@@ -138,6 +138,7 @@ public:
 private:
     /// Guarda el ancho del tablero
     int m_width;
+    
     /// Guarda la altura del tablero
     int m_height;
     
