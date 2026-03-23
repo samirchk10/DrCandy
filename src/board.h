@@ -11,11 +11,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "candy.h"
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-#include "candy.h"
 
 // Dimensiones por defecto de Board
 const int DEFAULT_BOARD_WIDTH = 10;

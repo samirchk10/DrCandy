@@ -1,9 +1,18 @@
-#include <filesystem>
+/**
+ * FITXER test.cpp
+ * AUTORS Alan Tchertchessov i Samir Channagui
+ * DATA 23/03/2026
+ * Tests de la clase Board. Comprueba el correcto funcionamiento
+ * de las funciones getCell, setCell, shouldExplode (conjuntamente con checkMatchDirection), explodeAndDrop,
+ * typeToChar, charToType, dump y load.
+ */
+
 #include "board.h"
 #include "candy.h"
 #include "controller.h"
 #include "game.h"
 #include "util.h"
+#include <filesystem>
 
 bool test()
 {
@@ -557,7 +566,7 @@ bool test()
 
 
 
-    // TESTS PARA dumb and load
+    // TESTS PARA dump and load
 
 
 
