@@ -30,8 +30,8 @@ const int INITIAL_COUNT = 1;
 // Dirreciones en las que realizar la busqueda de Candys de mismo tipo: stepX, stepY
 const int HORIZONTAL[2] = {1, 0};
 const int VERTICAL[2] = {0, 1};
-const int DIAGONAL_L[2] = {1, -1};
-const int DIAGONAL_R[2] = {1, 1};
+const int DIAGONAL_R[2] = {1, -1};
+const int DIAGONAL_L[2] = {1, 1};
 
 /**
  * CLASS Board
