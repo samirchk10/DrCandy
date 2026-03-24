@@ -316,7 +316,7 @@ bool Board::load(const std::string& input_path)
     m_cells.assign(m_height, std::vector<Candy*>(m_width, nullptr));
     // Elimina todos los elementos del vector, el tamaño pasa a 0 pero el espacio que ha reservado en memoria sigue ahi
     m_candyStorage.clear();
-    // Reserve la memoria necesaria en el heap (en vez del stack) para 100 punteros a candies. Lo hacemos asi para que
+    // Reserva la memoria necesaria en el heap (en vez del stack) para 100 punteros a candies. Lo hacemos asi para que
     // cuando el vector crezca, no busque otro bloque de memoria en la ram y mueva todo, los punteros de m_cells quedarian
     // apuntando en la direccion antigua que ya no sirve
     // m_cells guarda punteros a candies que estan en candyStorage, que no se muevan es importante
