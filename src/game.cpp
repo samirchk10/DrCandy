@@ -68,6 +68,25 @@ bool Game::load(const std::string& input_path)
 
 bool Game::operator==(const Game& other) const
 {
-    // Implement your code here
-    return false;
+    bool equal = ( m_frameCounter == other.m_frameCounter &&
+                m_score == other.m_score && m_gameOver == other.m_gameOver);
+
+    for (int x = 0; x < m_board.getWidth() && equal; x++)
+    {
+        for (int y = 0; y < m_board.getHeight() && equal; y++) 
+        {
+            Candy* a = m_board.getCell(x, y);
+            Candy* b = other.m_board.getCell(x, y);
+
+            bool same = (a == nullptr && b== nullptr) || (a != nullptr && b != nullptr && 
+                        a->getType() == b->getType());
+            
+            if (!same)
+            {
+                equal = false;
+            }
+        }
+    }
+
+    return equal;
 }

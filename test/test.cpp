@@ -591,6 +591,19 @@ bool test()
         std::cout << "Dump and load, correcto" << std::endl;
     }
 
+    // Test de load de un fichero que no existe
+    {
+        Board b(10, 10);
+
+        if (b.load("ficheroNoExiste.txt") != false)
+        {
+            std::cout << "Deberia devolver false ya que no existe el fichero, TEST FALLIDO" << std::endl;
+            return false;
+        }
+
+        std::cout << "Load devuelve false, el fichero no existe, TEST CORRECTO" << std::endl;
+    }
+
 
     // Dump and load game
     {
