@@ -1,6 +1,6 @@
 /**
  * FITXER test.cpp
- * AUTORS Alan Tchertchessov i Samir Channagui
+ * AUTORS Alan Tchertchessov y Samir Channagui
  * DATA 23/03/2026
  * Tests de la clase Board. Comprueba el correcto funcionamiento
  * de las funciones getCell, setCell, shouldExplode (conjuntamente con checkMatchDirection), explodeAndDrop,

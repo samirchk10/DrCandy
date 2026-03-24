@@ -1,7 +1,7 @@
 /**
  * FITXER board.cpp
- * AUTORS Alan Tchertchessov i Samir Channagui
- * DATA 23/03/2026
+ * AUTORS Alan Tchertchessov y Samir Channagui
+ * DATA 24/03/2026
  * Implementación de la clase Board
  */
 
@@ -152,9 +152,8 @@ std::vector<Candy*> Board::explodeAndDrop()
             }
         }
 
-        // Como size() da un tipo size_t que no puede ser negativo, hay que convertirlo a int para que el compilador lo acepte
         // Este bucle se encarga de añadir al vector explodedCandies los candies que tienen que explotar y posteriormente los convierte en nullptr dentro de m_cells
-        for (int i = 0; i < static_cast<int>(toExplodeX.size()); i++)
+        for (int i = 0; i < (toExplodeX.size()); i++)
         {
             explodedCandies.push_back(m_cells[toExplodeY[i]][toExplodeX[i]]);
             m_cells[toExplodeY[i]][toExplodeX[i]] = nullptr;
@@ -192,7 +191,7 @@ std::vector<Candy*> Board::explodeAndDrop()
                     // Mientras i (que representa el valor 0 en height (y) en la primera iteracion, y va incrementando hasta llegar al indice 9)
                     // sea menor que el tamaño del vector que guarda los candies de la columna, modifica m_cells con el valor correspondiente, ya
                     // sea un candy, o un nullptr
-                    if (i < static_cast<int>(columnCandies.size()))
+                    if (i < columnCandies.size())
                     {
                         m_cells[y][x] = columnCandies[i];
                     }

@@ -1,7 +1,7 @@
 /**
  * FITXER board.h
- * AUTORS Alan Tchertchessov i Samir Channagui
- * DATA 23/03/2026
+ * AUTORS Alan Tchertchessov y Samir Channagui
+ * DATA 24/03/2026
  * Declaración de la clase Board. Define la estructura del tablero de
  * punteros Candy, las constantes (dimensiones, direcciones,
  * minimo de explosion) y la interfaz publica para acceder, modificar,
