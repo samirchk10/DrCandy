@@ -184,10 +184,6 @@ std::vector<Candy*> Board::explodeAndDrop()
                 {
                     int i = m_height - 1 - y; // Para ir bajando una posicion en la columna en cada iteración
 
-                    // i nunca sera negativo en nuestro programa, pero para q el compilador no nos ponga un warning
-                    // lo convertimos a int. El warning es porque columnCandies.size() devuelve un size_t (un tipo)
-                    // y este solo puede ser positivo (ya que representa un tamaño)
-
                     // Mientras i (que representa el valor 0 en height (y) en la primera iteracion, y va incrementando hasta llegar al indice 9)
                     // sea menor que el tamaño del vector que guarda los candies de la columna, modifica m_cells con el valor correspondiente, ya
                     // sea un candy, o un nullptr
