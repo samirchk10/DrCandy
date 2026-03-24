@@ -352,7 +352,7 @@ bool test()
     }
 
 
-    // Test para comprovar que si 3 candies en linea coinciden en tipo, las celdas quedan nullptr despues de explotar
+    // Test para comprobar que si 3 candies en linea coinciden en tipo, las celdas quedan nullptr despues de explotar
     {
         Board b(10, 10);
         Candy candy1(CandyType::TYPE_RED);
@@ -381,8 +381,7 @@ bool test()
     }
 
 
-    // Test para comprova que un candy encima de una linea de candies que explota, cae abajo
-    // Test para comprova que un candy encima de una linea de candies que explota, cae abajo
+    // Test para comprobar que un candy encima de una linea de candies que explota, cae abajo
     {
         Board b(10, 10);
         Candy candy1(CandyType::TYPE_RED);
@@ -407,7 +406,7 @@ bool test()
     }
 
 
-    // Test de reaccion en cadena, comprovacion de que han quedado nullptr y un candy diferente a los explotados ha caido abajo
+    // Test de reaccion en cadena, comprobacion de que han quedado nullptr y un candy diferente a los explotados ha caido abajo
     {
         Board b(10, 10);
         Candy candy1(CandyType::TYPE_RED);
@@ -438,7 +437,7 @@ bool test()
             return false;
         }
 
-        // Comprovar que han quedado nullptr las celdas que estaban ocupadas, menos la (0, 9), donde deberia caer el candy blue 
+        // Comprobar que han quedado nullptr las celdas que estaban ocupadas, menos la (0, 9), donde deberia caer el candy blue 
         // y la (0, 5) que se comprueba despues
         if (b.getCell(1, 9) != nullptr || b.getCell(2, 9) != nullptr || b.getCell(0, 6) != nullptr
             || b.getCell(0, 7) != nullptr || b.getCell(0, 8) != nullptr)
@@ -453,7 +452,7 @@ bool test()
             return false;
         }
 
-        //Comprovamos que la celda donde estaba antes el candyExtra, es nullptr
+        //Comprobamos que la celda donde estaba antes el candyExtra, es nullptr
         if (b.getCell(0, 5) != nullptr)
         {
             std::cout << "La celda donde estaba antes el candy blue, no ha quedado vacia, TEST FALLIDO" << std::endl;
