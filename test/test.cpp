@@ -27,9 +27,9 @@ bool test()
 
     // Test dimensiones por defecto
     {
-        Board b1;
+        Board b;
         
-        if (b1.getWidth() != DEFAULT_BOARD_WIDTH || b1.getHeight() != DEFAULT_BOARD_HEIGHT)
+        if (b.getWidth() != DEFAULT_BOARD_WIDTH || b.getHeight() != DEFAULT_BOARD_HEIGHT)
         {
             std::cout << "Dimensiones por defecto cargadas incorrectamente, TEST FALLIDO" << std::endl;
             return false;
@@ -40,9 +40,9 @@ bool test()
 
     // Test dimensiones personalizadas
     {
-        Board b3(5, 7);
+        Board b(5, 7);
 
-        if (b3.getWidth() != 5 || b3.getHeight() != 7)
+        if (b.getWidth() != 5 || b.getHeight() != 7)
         {
             std::cout << "Dimensiones personalizadas no cargadas, TEST FALLIDO" << std::endl;
             return false;
