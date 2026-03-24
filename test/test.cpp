@@ -331,7 +331,7 @@ bool test()
     }
 
 
-    // Test que comprueva que se devuelva un vector vacio cuando no explota ninguna linea
+    // Test que comprueba que se devuelva un vector vacio cuando no explota ninguna linea
     {
         Board b(10, 10);
         Candy candy1(CandyType::TYPE_RED);
@@ -345,6 +345,7 @@ bool test()
         if (!exploded.empty())
         {
             std::cout << "Deberia devolver un vector vacio, TEST FALLIDO" << std::endl;
+            return false;
         }
 
         std::cout << "Devuelve un vector vacio, TEST CORRECTO" << std::endl;
