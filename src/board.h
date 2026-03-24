@@ -128,7 +128,7 @@ public:
      * @param initialType: tipo de candy inicial
      * @param stepX: paso en x de la dirección
      * @param stepY: paso en y de la dirección
-     @return true si hay 3 o mas coincidencias, falso si no es así
+     * @return true si hay 3 o mas coincidencias, falso si no es así
     
      */
     bool checkMatchDirection(int x, int y, CandyType typeInicial, int stepX, int stepY) const;
