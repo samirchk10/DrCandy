@@ -1,7 +1,7 @@
 /**
  * FITXER test.cpp
  * AUTORS Alan Tchertchessov y Samir Channagui
- * DATA 23/03/2026
+ * DATA 24/03/2026
  * Tests de la clase Board. Comprueba el correcto funcionamiento
  * de las funciones getCell, setCell, shouldExplode (conjuntamente con checkMatchDirection), explodeAndDrop,
  * typeToChar, charToType, dump y load.
@@ -310,13 +310,13 @@ bool test()
 
         std::vector<Candy*> exploded = b.explodeAndDrop();
 
-        if (exploded.size() != 3)
+        if (static_cast<int>(exploded.size()) != 3)
         {
             std::cout << "El tamaño del vector no es igual a 3, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        for (int i = 0; i < exploded.size(); i++)
+        for (int i = 0; i < static_cast<int>(exploded.size()); i++)
         {
             std::cout << static_cast<int>(exploded[i]->getType()) << " ";
         }
@@ -364,7 +364,7 @@ bool test()
 
         std::vector<Candy*> exploded = b.explodeAndDrop();
 
-        if (exploded.size() != 3)
+        if (static_cast<int>(exploded.size()) != 3)
         {
             std::cout << "Deberia devolver 3 candies, TEST FALLIDO" << std::endl;
             return false;
@@ -431,7 +431,7 @@ bool test()
 
         std::vector<Candy*> exploded = b.explodeAndDrop();
 
-        if (exploded.size() != 6)
+        if (static_cast<int>(exploded.size()) != 6)
         {
             std::cout << "Deberia devolver 6 candies, TEST FALLIDO" << std::endl;
             return false;
