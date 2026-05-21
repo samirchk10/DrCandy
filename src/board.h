@@ -141,8 +141,8 @@ private:
     // Guarda la altura del tablero
     int m_height;
     
-    // Vector 2D de punteros de Candy
-    std::vector<std::vector<Candy*>> m_cells;
+    // Array dinamico a punteros de candy, cada casilla es un puntero a candy (Candy*) o nullptr
+    Candy** m_board;
 
     // Vector para almacenar candies
     std::vector<Candy> m_candyStorage;

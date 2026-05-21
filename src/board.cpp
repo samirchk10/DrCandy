@@ -11,7 +11,16 @@
 #include <fstream>
 
 // Inicializa el tablero con las dimensiones dadas, y a su vez inicializa un vector 2D con height filas y width columnas, rellenado con nullptrs
-Board::Board(int width, int height) : m_width(width), m_height(height) , m_cells(height, std::vector<Candy*>(width, nullptr)) {}
+Board::Board(int width, int height) : m_width(width), m_height(height)
+{
+    // Reserva memoria para el array dinamico de punteros a Candy
+    m_board = new Candy*[m_width * m_height];
+
+    for (int i = 0; i < m_width * m_height; i++)
+    {
+        m_board[i] = nullptr;
+    }
+}
 
 // Esto no hace falta implementarlo aun
 Board::~Board()
