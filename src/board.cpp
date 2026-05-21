@@ -282,13 +282,13 @@ bool Board::dump(const std::string& output_path) const
     {
         for (int x = 0; x < m_width; x++)
         {
-            if (m_cells[y][x] == nullptr)
+            if (m_cells[y * m_width + x] == nullptr)
             {
                 file << ". ";
             }
             else
             {
-                file << typeToChar(m_cells[y][x]->getType()) << " ";
+                file << typeToChar(m_cells[y * m_width + x]->getType()) << " ";
             }
         }
         file << "\n";
