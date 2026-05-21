@@ -326,18 +326,9 @@ bool Board::load(const std::string& input_path)
     {
         return false;
     }
-    // Borramos los candies actuales
-    for (Candy* candy : m_candyStorage)
-    {
-        // Libera memoria que ocupaba el candy al que apunta Candy* candy
-        delete candy;
-    }
-
-    // Deja el vector con tamaño 0, lo vacia
-    m_candyStorage.clear();
-
-    // Libera la memoria que ocupaba el array antiguo
-    delete[] m_board;
+    
+    // Libera toda la memoria reservada por Board, los candies creados con new y el array de celdas
+    clear();
 
     // Leemos las dimensiones que guardamos en el fichero
     file >> m_width >> m_height;
