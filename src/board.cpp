@@ -10,16 +10,10 @@
 #include <iostream>
 #include <fstream>
 
-// Inicializa el tablero con las dimensiones dadas, y a su vez inicializa un vector 2D con height filas y width columnas, rellenado con nullptrs
-Board::Board(int width, int height) : m_width(width), m_height(height)
-{
-    // Reserva memoria para el array dinamico de punteros a Candy
-    m_board = new Candy*[m_width * m_height];
-
-    for (int i = 0; i < m_width * m_height; i++)
-    {
-        m_board[i] = nullptr;
-    }
+// Inicializa el tablero con las dimensiones dadas, y a su vez inicializa el tablero rellenando con nullptr
+Board::Board(int width, int height) : m_width(width), m_height(height) 
+{ 
+    initBoard(); 
 }
 
 // Esto no hace falta implementarlo aun
@@ -27,6 +21,15 @@ Board::~Board()
 {
 }
 
+void Board::initBoard()
+{
+    m_board = new Candy*[m_width * m_height];
+
+    for (int i = 0; i < m_width * m_height)
+    {
+        m_board[i] = nullptr;
+    }
+}
 
 Candy* Board::getCell(int x, int y) const
 {
@@ -311,20 +314,24 @@ bool Board::load(const std::string& input_path)
     {
         return false;
     }
+    // Borramos los candies actuales
+    for (Candy* candy : m_candyStorage)
+    {
+        // Libera memoria que ocupaba el candy al que apunta Candy* candy
+        delete candy;
+    }
 
-    // Leemos las dimensiones que guardamos en el fichero
-    file >> m_width >> m_height;
-
-    // Reiniciamos el tablero convirtiendo todo a nullptr. Como m_cells ya existe como miembro de la clase, hay que reinicializar
-    // los valores del vector de vectores con .assign()
-    m_cells.assign(m_height, std::vector<Candy*>(m_width, nullptr));
-    // Elimina todos los elementos del vector, el tamaño pasa a 0 pero el espacio que ha reservado en memoria sigue ahi
+    // Deja el vector con tamaño 0, lo vacia
     m_candyStorage.clear();
-    // Reserva la memoria necesaria en el heap (en vez del stack) para 100 punteros a candies. Lo hacemos asi para que
-    // cuando el vector crezca, no busque otro bloque de memoria en la ram y mueva todo, los punteros de m_cells quedarian
-    // apuntando en la direccion antigua que ya no sirve
-    // m_cells guarda punteros a candies que estan en candyStorage, que no se muevan es importante
-    m_candyStorage.reserve(m_width * m_height);
+
+    // Libera la memoria que ocupaba el array antiguo
+    delete[] m_board;
+
+    // Leemos las dimensiones que guardamos en el fichero y reservamos espacio de nuevo para el array
+    file >> m_width >> m_height;
+    m_board = new Candy*[m_width * m_height];
+    // Inicializamos tablero con las casillas rellenadas con nullptr
+    initBoard();
 
     for (int y = 0; y < m_height; y++)
     {
@@ -334,17 +341,11 @@ bool Board::load(const std::string& input_path)
             // Lee el caracter del fichero en cada iteracion y lo guarda en c
             file >> c;
 
-            if (c == '.')
+            if (c != '.')
             {
-                m_board[y * m_width + x] = nullptr;
-            }
-            else
-            {
-                // Guarda en el vector de storage un objeto candy unico creado con el tipo que este especificado 
-                // con la inicial encontrada en el fichero
-                m_candyStorage.push_back(Candy(charToType(c)));
-                // Guarda un puntero al ultimo candy que se ha añadido en m_candyStorage en las coordenadas que correspondan
-                m_board[y * m_width + x] = &m_candyStorage.back();
+                Candy* newCandy = new Candy(charToType(c));
+                m_board[y * m_width + x] = newCandy;
+                m_candyStorage.push_back(newCandy);
             }
         }
     }

@@ -144,8 +144,10 @@ private:
     // Array dinamico a punteros de candy, cada casilla es un puntero a candy (Candy*) o nullptr
     Candy** m_board;
 
-    // Vector para almacenar candies
-    std::vector<Candy> m_candyStorage;
+    // Vector con los candies que Board ha creado con new
+    std::vector<Candy*> m_candyStorage;
+
+    void initBoard();
 };
 
 #endif
