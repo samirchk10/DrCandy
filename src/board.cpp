@@ -37,7 +37,7 @@ Candy* Board::getCell(int x, int y) const
     }
 
     // Devuelve Candy* (la dirección de memoria) de las coordenadas dadas
-    return m_cells[y][x];
+    return m_cells[y * m_width + x];
 }
 
 
