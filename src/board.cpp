@@ -30,28 +30,27 @@ Board::~Board()
 
 Candy* Board::getCell(int x, int y) const
 {
-    // Si las coordenadas estan fuera del tablero, devolver nullptr
-    if (x < 0 || x >= m_width || y < 0 || y >= m_height)
+    Candy* candy = nullptr;
+
+    // Si las coordenadas estan dentro del tablero, asignamos a candy la celda pertinente
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
-        return nullptr;
+        candy = m_board[y * m_width + x];
     }
 
     // Devuelve Candy* (la dirección de memoria) de las coordenadas dadas
-    return m_cells[y * m_width + x];
+    return candy;
 }
 
 
 void Board::setCell(Candy* candy, int x, int y)
 {
-    if (x < 0 || x >= m_width || y < 0 || y >= m_height)
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
-        return; // Si se cumple el if, se sale de la función
+        // candy ya es un puntero, ya que tenemos "Candy* candy" como parametro
+        m_cells[y * m_width + x] = candy;
     }
-
-    // candy ya es un puntero, ya que tenemos "Candy* candy" como parametro
-    m_cells[y][x] = candy;
 }
-
 
 int Board::getWidth() const
 {
