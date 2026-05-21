@@ -48,7 +48,7 @@ void Board::setCell(Candy* candy, int x, int y)
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
         // candy ya es un puntero, ya que tenemos "Candy* candy" como parametro
-        m_cells[y * m_width + x] = candy;
+        m_board[y * m_width + x] = candy;
     }
 }
 
@@ -99,7 +99,7 @@ bool Board::checkMatchDirection(int x, int y, CandyType initialType, int stepX, 
 bool Board::shouldExplode(int x, int y) const
 {
     // Devolver false si las coordenadas dadas son negativas, estan fuera del tablero o son las de una celda vacia nullptr
-    if (x < 0 || x >= m_width || y < 0 || y >= m_height || m_cells[y][x] == nullptr)
+    if (x < 0 || x >= m_width || y < 0 || y >= m_height || m_board[y * m_width + x] == nullptr)
     {
         return false;
     }
@@ -152,7 +152,7 @@ std::vector<Candy*> Board::explodeAndDrop()
         {
             for (int x = 0; x < m_width; x++)
             {
-                if (m_cells[y][x] != nullptr && shouldExplode(x, y))
+                if (m_board[y * m_width + x] != nullptr && shouldExplode(x, y))
                 {
                     toExplodeX.push_back(x);
                     toExplodeY.push_back(y);
@@ -181,9 +181,9 @@ std::vector<Candy*> Board::explodeAndDrop()
                 for (int y = m_height - 1; y >= 0; y--)
                 {
                     // Todos los que no sean nullptr, se van guardando en el vector columnCandies
-                    if (m_cells[y][x] != nullptr)
+                    if (m_board[y * m_width + x] != nullptr)
                     {
-                        columnCandies.push_back(m_cells[y][x]);
+                        columnCandies.push_back(m_board[y * m_width + x]);
                     }
                 }
 
@@ -197,11 +197,11 @@ std::vector<Candy*> Board::explodeAndDrop()
                     // sea un candy, o un nullptr
                     if (i < static_cast<int>(columnCandies.size()))
                     {
-                        m_cells[y][x] = columnCandies[i];
+                        m_board[y * m_width + x] = columnCandies[i];
                     }
                     else
                     {
-                        m_cells[y][x] = nullptr;
+                        m_board[y * m_width + x] = nullptr;
                     }
                 }
             }
@@ -282,13 +282,13 @@ bool Board::dump(const std::string& output_path) const
     {
         for (int x = 0; x < m_width; x++)
         {
-            if (m_cells[y * m_width + x] == nullptr)
+            if (m_board[y * m_width + x] == nullptr)
             {
                 file << ". ";
             }
             else
             {
-                file << typeToChar(m_cells[y * m_width + x]->getType()) << " ";
+                file << typeToChar(m_board[y * m_width + x]->getType()) << " ";
             }
         }
         file << "\n";
@@ -336,7 +336,7 @@ bool Board::load(const std::string& input_path)
 
             if (c == '.')
             {
-                m_cells[y][x] = nullptr;
+                m_board[y * m_width + x] = nullptr;
             }
             else
             {
@@ -344,7 +344,7 @@ bool Board::load(const std::string& input_path)
                 // con la inicial encontrada en el fichero
                 m_candyStorage.push_back(Candy(charToType(c)));
                 // Guarda un puntero al ultimo candy que se ha añadido en m_candyStorage en las coordenadas que correspondan
-                m_cells[y][x] = &m_candyStorage.back();
+                m_board[y * m_width + x] = &m_candyStorage.back();
             }
         }
     }
