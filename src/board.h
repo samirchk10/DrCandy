@@ -147,7 +147,8 @@ private:
     // Vector con los candies que Board ha creado con new
     std::vector<Candy*> m_candyStorage;
 
-    void initBoard();
+    void init();
+    void clear();
 };
 
 #endif

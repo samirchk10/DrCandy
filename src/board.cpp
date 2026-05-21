@@ -13,15 +13,16 @@
 // Inicializa el tablero con las dimensiones dadas, y a su vez inicializa el tablero rellenando con nullptr
 Board::Board(int width, int height) : m_width(width), m_height(height) 
 { 
-    initBoard(); 
+    init(); 
 }
 
 // Esto no hace falta implementarlo aun
 Board::~Board()
 {
+    clear();
 }
 
-void Board::initBoard()
+void Board::init()
 {
     m_board = new Candy*[m_width * m_height];
 
@@ -29,6 +30,17 @@ void Board::initBoard()
     {
         m_board[i] = nullptr;
     }
+}
+
+void Board::clear()
+{
+    for (Candy* candy : m_candyStorage)
+    {
+        delete candy;
+    }
+
+    m_candyStorage.clear();
+    delete[] m_board;
 }
 
 Candy* Board::getCell(int x, int y) const
@@ -330,7 +342,7 @@ bool Board::load(const std::string& input_path)
     // Leemos las dimensiones que guardamos en el fichero
     file >> m_width >> m_height;
     // Inicializamos tablero con las casillas rellenadas con nullptr, con espacio reservado previamente para los candies
-    initBoard();
+    init();
 
     for (int y = 0; y < m_height; y++)
     {
