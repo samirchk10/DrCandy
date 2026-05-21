@@ -163,8 +163,8 @@ std::vector<Candy*> Board::explodeAndDrop()
         // Este bucle se encarga de añadir al vector explodedCandies los candies que tienen que explotar y posteriormente los convierte en nullptr dentro de m_cells
         for (int i = 0; i < static_cast<int>(toExplodeX.size()); i++)
         {
-            explodedCandies.push_back(m_cells[toExplodeY[i]][toExplodeX[i]]);
-            m_cells[toExplodeY[i]][toExplodeX[i]] = nullptr;
+            explodedCandies.push_back(m_cells[toExplodeY[i] * m_width + toExplodeX[i]]);
+            m_board[toExplodeY[i] * m_width + toExplodeX[i]] = nullptr;
 
             exploded = true;
         }
