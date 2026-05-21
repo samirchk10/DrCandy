@@ -25,7 +25,7 @@ void Board::initBoard()
 {
     m_board = new Candy*[m_width * m_height];
 
-    for (int i = 0; i < m_width * m_height)
+    for (int i = 0; i < m_width * m_height; i++)
     {
         m_board[i] = nullptr;
     }
