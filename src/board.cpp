@@ -166,7 +166,7 @@ std::vector<Candy*> Board::explodeAndDrop()
         // Este bucle se encarga de añadir al vector explodedCandies los candies que tienen que explotar y posteriormente los convierte en nullptr dentro de m_cells
         for (int i = 0; i < static_cast<int>(toExplodeX.size()); i++)
         {
-            explodedCandies.push_back(m_cells[toExplodeY[i] * m_width + toExplodeX[i]]);
+            explodedCandies.push_back(m_board[toExplodeY[i] * m_width + toExplodeX[i]]);
             m_board[toExplodeY[i] * m_width + toExplodeX[i]] = nullptr;
 
             exploded = true;
@@ -327,10 +327,9 @@ bool Board::load(const std::string& input_path)
     // Libera la memoria que ocupaba el array antiguo
     delete[] m_board;
 
-    // Leemos las dimensiones que guardamos en el fichero y reservamos espacio de nuevo para el array
+    // Leemos las dimensiones que guardamos en el fichero
     file >> m_width >> m_height;
-    m_board = new Candy*[m_width * m_height];
-    // Inicializamos tablero con las casillas rellenadas con nullptr
+    // Inicializamos tablero con las casillas rellenadas con nullptr, con espacio reservado previamente para los candies
     initBoard();
 
     for (int y = 0; y < m_height; y++)
