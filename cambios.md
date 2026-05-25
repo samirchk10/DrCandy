@@ -12,4 +12,4 @@ Antes teniamos `vector<Candy>` que guardaba objetos por valor. Ahora usamos `vec
     - Reserva un array nuevo para b2 (no comparte el de b1).
     - Crea nuevos candies copiados de los de b1, y los pone en su array.
 
-El resultado es que b2 tendrá exactamente los mismos datos que b1, pero en memoria separada. Si borramos b1, b2 sigue funciona. Si modificamos b2, b1 no cambia.
+    El resultado es que b2 tendrá exactamente los mismos datos que b1, pero en memoria separada. Si borramos b1, b2 sigue funciona. Si modificamos b2, b1 no cambia.
