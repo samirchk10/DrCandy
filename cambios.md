@@ -63,7 +63,7 @@ Antes teniamos `vector<Candy>` que guardaba objetos por valor. Ahora usamos `vec
 
 En todas las funciones `setCell`, `shouldExplode`, `explodeAndDrop`, `dump`, se ha sustituido `m_cells[y][x]` por `m_board[y * m_width + x]`. Este cambio se ha realizado porque en la primera entrega el tablero era un `vector<vector<Candy*>>` de dos dimensiones, y se accedia por `m_cells[y][x]`. 
 
-En la segunda entrega lo hemos cambiado por un array dinamico de una dimension `Candy** m_board`, que para acceder a la celda (x, y) dentro de una sola fila usamos la formula `y * m_width + x`.
+En la segunda entrega lo hemos cambiado por un array dinamico de una dimension `Candy** m_board`, que para acceder a la celda (x, y) dentro de una sola fila usamos la formula `y * m_width + x`:
 ![](./data/img/1.png)
 
 Explicación de `Candy** m_board = new Candy*[m_width * m_height];` en el metodo `setCell()`:
