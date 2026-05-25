@@ -16,10 +16,26 @@ Board::Board(int width, int height) : m_width(width), m_height(height)
     init(); 
 }
 
+Board::Board(const Board& b)
+{
+    copyFrom(b);
+}
+
 // Esto no hace falta implementarlo aun
 Board::~Board()
 {
     clear();
+}
+
+Board& Board::operator=(const Board& b)
+{
+    if (this != &b) // Para evitar asignarse a el mismo
+    {
+        clear();
+        copyFrom(b);
+    }
+
+    return *this;
 }
 
 void Board::init()
@@ -41,6 +57,23 @@ void Board::clear()
 
     m_candyStorage.clear();
     delete[] m_board;
+}
+
+void Board::copyFrom(const Board& b)
+{
+    m_width = b.m_width;
+    m_height = b.m_height;
+    init();
+
+    for (int i = 0; m_width * m_height; i++)
+    {
+        if (b.m_board[i] != nullptr)
+        {
+            Candy* newCandy = new Candy(*b.m_board[i]);
+            m_board[i] = newCandy;
+            m_candyStorage.push_back(newCandy);
+        }
+    }
 }
 
 Candy* Board::getCell(int x, int y) const

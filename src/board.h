@@ -45,8 +45,14 @@ public:
     // Inicializa un tablero con las dimensiones dadas
     Board(int width = DEFAULT_BOARD_WIDTH, int height = DEFAULT_BOARD_HEIGHT);
 
+    // Constructor de copia (cuando hacemos Board b2 = b1)
+    Board(const Board& b);
+
     // Libera todos los recursos manejados por Board
     ~Board();
+
+    // Operador de asignacion (cuando hacemos b2 = b1)
+    Board& operator=(const Board& b);
 
     /**
     * Determina si el candy en las coordenadas dadas debe explotar
@@ -149,6 +155,7 @@ private:
 
     void init();
     void clear();
+    void copyFrom(const Board& b);
 };
 
 #endif
