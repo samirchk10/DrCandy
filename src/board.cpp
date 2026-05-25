@@ -65,7 +65,7 @@ void Board::copyFrom(const Board& b)
     m_height = b.m_height;
     init();
 
-    for (int i = 0; m_width * m_height; i++)
+    for (int i = 0; i < m_width * m_height; i++)
     {
         if (b.m_board[i] != nullptr)
         {
