@@ -3,19 +3,48 @@
 #include "graphics.h"
 #include "candy.h"
 
-Game::Game()
+Game::Game() : m_frameCounter(0), m_score(0), m_gameOver(false)
 {
-    // Implement your code here
+    for (int i = 0; i < 3; i++)
+    {
+        m_fallingBlock[i] = nullptr;
+    }
+
+    spawnBlock();
 }
 
 Game::~Game()
 {
-    // Implement your code here
+    for (Candy* candy : m_candies)
+    {
+        delete candy;
+    }
+}
+
+void Game::spawnBlock()
+{
+    // Donde inicia el bloque 
+    m_blockX = 5;
+    m_blockY = -1;
+
+    // Creamos 3 candies aleatorios y registramos en m_candies que esos candies han estado creados por Game
+    for (int i = 0; i < 3; i++)
+    {
+        m_fallingBlock[i] = new Candy(static_cast<CandyType>(rand() % 6));
+        m_candies.push_back(m_fallingBlock[i]);
+    }
+
+
+    // Si la celda por donde entra el bloque (columan 5 fila 0) esta ocupada, es gameover, el bloque no puede bajar.
+    if (m_board.getCell(m_blockX, 0) != nullptr)
+    {
+        m_gameOver = true;
+    }
 }
 
 void Game::update(const Controller& controller)
 {
-    // Implement your code here
+    
 }
 
 void Game::render(GraphicManager& graphics)

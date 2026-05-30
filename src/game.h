@@ -61,5 +61,13 @@ class Game
         int m_score;
         bool m_gameOver;
 
+        Candy* m_fallingBlock[3];
+        int m_blockX;
+        int m_blockY;
+
+        std::vector<Candy*> m_candies;
+
+        void spawnBlock();
+
 };
 #endif
