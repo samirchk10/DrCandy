@@ -148,21 +148,40 @@ void Game::update(const Controller& controller)
 
 void Game::render(GraphicManager& graphics)
 {
-    // Implement your code here
-    
-    // Note: the following code exhibits the main graphic library features
-    // Board: border [draw rectangles] and a single piece of candy
-    const int board_size = 10;
     const int board_padding = 3;
     graphics.drawRectangle(
         CANDY_IMAGE_HEIGHT * board_padding, CANDY_IMAGE_HEIGHT * board_padding,
-        CANDY_IMAGE_WIDTH * board_size,
-        CANDY_IMAGE_HEIGHT * board_size,
+        CANDY_IMAGE_WIDTH * m_board.getWidth(),
+        CANDY_IMAGE_HEIGHT * m_board.getHeight(),
         5, 150, 150, 150);
-    // Board: place a candy piece
-    graphics.drawImage(Candy(CandyType::TYPE_PURPLE).getResourceName(),
-        CANDY_IMAGE_WIDTH * 3,
-        CANDY_IMAGE_HEIGHT * 3);
+
+    for (int y = 0; y < m_board.getHeight(); y++)
+    {
+        for (int x = 0; x < m_board.getWidth(); x++)
+        {
+            Candy* candy = m_board.getCell(x, y);
+
+            if (candy != nullptr)
+            {
+                graphics.drawImage(candy->getResourceName(),
+                    CANDY_IMAGE_WIDTH * (board_padding + x),
+                    CANDY_IMAGE_HEIGHT * (board_padding + y));
+            }
+        }
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        int candyY = m_blockY - i;
+
+        if (candyY >= 0)
+        {
+            graphics.drawImage(m_fallingBlock[i]->getResourceName(),
+                CANDY_IMAGE_WIDTH * (board_padding + m_blockX),
+                CANDY_IMAGE_HEIGHT * (board_padding + candyY)));
+        }
+    }
+    
     // Title [draw images]
     graphics.drawImage("img/logo_small.png", 10, 10);
     // Score and footer [draw text]
