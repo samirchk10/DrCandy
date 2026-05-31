@@ -91,7 +91,7 @@ bool Game::canMoveTo(int newX) const
         {
             int candyY = m_blockY - i;
 
-            if (candyY >= 0 && m_board.getCell(newX, candy) != nullptr)
+            if (candyY >= 0 && m_board.getCell(newX, candyY) != nullptr)
             {
                 canMove = false;
             }
