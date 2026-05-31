@@ -42,9 +42,108 @@ void Game::spawnBlock()
     }
 }
 
+bool Game::canFall() const
+{
+    bool canMove = true;
+    int nextY = m_blockY + 1;
+
+    if (nextY >= m_board.getHeight())
+    {
+        canMove = false;
+    }
+    else if (nextY >= 0 && m_board.getCell(m_blockX, nextY) != nullptr)
+    {
+        canMove = false;
+    }
+
+    return canMove;
+}
+
+void Game::landBlock()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        int candyY = m_blockY - i;
+
+        if (candyY >= 0)
+        {
+            m_board.setCell(m_fallingBlock[i], m_blockX, candyY);
+        }
+    }
+
+    std::vector<Candy*> exploded = m_board.explodeAndDrop();
+    m_score += static_cast>int>(exploded.size());
+
+    spawnBlock();
+}
+
+bool Game::canMoveTo(int newX) const
+{
+    bool canMove = true;
+
+    if (newX < 0 || newX >= m_board.getWidth())
+    {
+        canMove = false;
+    }
+    else
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int candyY = m_blockY - i;
+
+            if (candyY >= && m_board.getCell(newX, candy) != nullptr)
+            {
+                canMove = false;
+            }
+        }
+    }
+
+    return canMove;
+}
+
+void Game::rotateBlock()
+{
+    Candy* first = m_fallingBlock[0];
+    m_fallingBlock[0] = m_fallingBlock[1];
+    m_fallingBlock[1] = m_fallingBlock[2];
+    m_fallingBlock[2] = first;
+}
+
 void Game::update(const Controller& controller)
 {
-    
+    if (!m_gameOver)
+    {
+        if (controller.isLeftPressed() && canMoveTo(m_blockX - 1))
+        {
+            m_blockX--;
+        }
+        if (controller.isRightPressed() && canMoveTo(m_blockX + 1))
+        {
+            m_blockX++;
+        }
+        if (controller.isDownPressed() && canFall())
+        {
+            m_blockY++;
+        }
+        if (controller.isKey1Pressed())
+        {
+            rotateBlock();
+        }
+
+        if (m_frameCounter % 60 == 0)
+        {
+            if (canFall())
+            {
+                m_blockY++;
+            }
+            else
+            {
+                landBlock();
+            }
+        }
+
+        m_frameCounter++;
+    }
 }
 
 void Game::render(GraphicManager& graphics)

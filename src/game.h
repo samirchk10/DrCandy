@@ -68,6 +68,10 @@ class Game
         std::vector<Candy*> m_candies;
 
         void spawnBlock();
+        bool canFall() const;
+        void landBlock();
+        bool canMoveTo(int newX) const;
+        void rotateBlock();
 
 };
 #endif
