@@ -72,7 +72,7 @@ void Game::landBlock()
     }
 
     std::vector<Candy*> exploded = m_board.explodeAndDrop();
-    m_score += static_cast>int>(exploded.size());
+    m_score += static_cast<int>(exploded.size());
 
     spawnBlock();
 }
@@ -91,7 +91,7 @@ bool Game::canMoveTo(int newX) const
         {
             int candyY = m_blockY - i;
 
-            if (candyY >= && m_board.getCell(newX, candy) != nullptr)
+            if (candyY >= 0 && m_board.getCell(newX, candy) != nullptr)
             {
                 canMove = false;
             }
@@ -150,7 +150,7 @@ void Game::render(GraphicManager& graphics)
 {
     const int board_padding = 3;
     graphics.drawRectangle(
-        CANDY_IMAGE_HEIGHT * board_padding, CANDY_IMAGE_HEIGHT * board_padding,
+        CANDY_IMAGE_WIDTH * board_padding, CANDY_IMAGE_HEIGHT * board_padding,
         CANDY_IMAGE_WIDTH * m_board.getWidth(),
         CANDY_IMAGE_HEIGHT * m_board.getHeight(),
         5, 150, 150, 150);
@@ -178,17 +178,17 @@ void Game::render(GraphicManager& graphics)
         {
             graphics.drawImage(m_fallingBlock[i]->getResourceName(),
                 CANDY_IMAGE_WIDTH * (board_padding + m_blockX),
-                CANDY_IMAGE_HEIGHT * (board_padding + candyY)));
+                CANDY_IMAGE_HEIGHT * (board_padding + candyY));
         }
     }
-    
+
     // Title [draw images]
     graphics.drawImage("img/logo_small.png", 10, 10);
     // Score and footer [draw text]
     graphics.drawText("Movement: [Up] [Down] [Left] [Right]  --  "
                       "Buttons: [Q] [W] [E]  --  Exit [ESC]",
                       25, 700, 20, 100, 100, 100);
-    graphics.drawText("Score: ", 450, 10, 70, 125, 200, 125);
+    graphics.drawText("Score: " + std::to_string(m_score), 450, 10, 70, 125, 200, 125);
 }
 
 void Game::run()
