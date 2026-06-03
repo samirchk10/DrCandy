@@ -7,7 +7,7 @@
 
 Game::Game() : m_frameCounter(0), m_score(0), m_gameOver(false)
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < BLOCK_SIZE; i++)
     {
         m_fallingBlock[i] = nullptr;
     }
@@ -26,13 +26,13 @@ Game::~Game()
 void Game::spawnBlock()
 {
     // Donde inicia el bloque 
-    m_blockX = 5;
-    m_blockY = -1;
+    m_blockX = INITIAL_BLOCK_X;
+    m_blockY = INITIAL_BLOCK_Y;
 
     // Creamos 3 candies aleatorios y registramos en m_candies que esos candies han estado creados por Game
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < BLOCK_SIZE; i++)
     {
-        m_fallingBlock[i] = new Candy(static_cast<CandyType>(rand() % 6));
+        m_fallingBlock[i] = new Candy(static_cast<CandyType>(rand() % NUM_CANDY_TYPES));
         m_candies.push_back(m_fallingBlock[i]);
     }
 
@@ -63,7 +63,7 @@ bool Game::canFall() const
 
 void Game::landBlock()
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < BLOCK_SIZE; i++)
     {
         int candyY = m_blockY - i;
 
@@ -89,7 +89,7 @@ bool Game::canMoveTo(int newX) const
     }
     else
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < BLOCK_SIZE; i++)
         {
             int candyY = m_blockY - i;
 
@@ -136,7 +136,7 @@ void Game::update(const Controller& controller)
             dump(getDataDirPath() + "/save.txt");
         }
 
-        if (m_frameCounter % 60 == 0)
+        if (m_frameCounter % FRAMES_PER_DROP == 0)
         {
             if (canFall())
             {
@@ -176,7 +176,7 @@ void Game::render(GraphicManager& graphics)
         }
     }
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < BLOCK_SIZE; i++)
     {
         int candyY = m_blockY - i;
 
@@ -220,7 +220,7 @@ bool Game::dump(const std::string& output_path) const
     }
     file << m_score << " " << m_frameCounter << " " << m_gameOver << "\n";
     file << m_blockX << " " << m_blockY << "\n";
-    for (int i = 0; i < 3; i++) 
+    for (int i = 0; i < BLOCK_SIZE; i++) 
     {
         if (m_fallingBlock[i] == nullptr) 
         {
@@ -259,7 +259,7 @@ bool Game::load(const std::string& input_path)
     file >> m_score >> m_frameCounter >> m_gameOver;
     file >> m_blockX >> m_blockY;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < BLOCK_SIZE; i++)
     {
         char c;
         file >> c;
