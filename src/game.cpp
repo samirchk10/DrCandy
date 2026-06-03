@@ -203,14 +203,58 @@ void Game::run()
 
 bool Game::dump(const std::string& output_path) const
 {
-    // Implement your code here
-    return false;
+    if (!m_board.dump(output_path)) {
+        return false;
+    }
+    std::ofstream file(output_path, std::ios::app);
+    if (!file.is_open()) {
+        return false;
+    }
+    file << m_score << " " << m_frameCounter << " " << m_gameOver << "\n";
+    file << m_blockX << " " << m_blockY << "\n";
+    for (int i = 0; i < 3; i++) {
+        if (m_fallingBlock[i] == nullptr) {
+            file << ". ";
+        }
+        else {
+            file << m_board.typeToChar(m_fallingBlock[i]->getType()) << " ";
+        }
+    }
+    file << "\n";
+    file.close();
+    return true;
 }
 
 bool Game::load(const std::string& input_path)
 {
-    // Implement your code here
-    return false;
+    if (!m_board.load(input_path)) {
+        return false;
+    }
+    std::ifstream file(input_path);
+    if (!file.is_open()) {
+        return false;
+    }
+    int width, height;
+    file >> m_score >> m_frameCounter >> m_gameOver;
+    file >> m_blockX >> m_blockY;
+    for (int i = 0; i < 3; i++) {
+        if (m_fallingBlock[i] != nullptr) {
+            delete m_fallingBlock[i];
+            m_fallingBlock[i] = nullptr;
+        }
+    }
+    for (int i = 0; i < 3; i++){
+        char c;
+        file >> c;
+        if (c == '.') {
+            m_fallingBlock[i] = nullptr;
+        }
+        else {
+            m_fallingBlock[i] = new Candy(m_board.charToType(c));
+        }
+    }
+    file.close();
+    return True();
 }
 
 bool Game::operator==(const Game& other) const
