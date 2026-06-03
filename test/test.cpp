@@ -627,7 +627,7 @@ bool test()
             return false;
         }
 
-        std::cout << "[23] Constructor deep copy correcto" << std::endl;
+        std::cout << "[23] Constructor deep copy correcto, TEST CORRECTO" << std::endl;
     }
 
     // Test operadro asignacion
@@ -645,7 +645,7 @@ bool test()
             return false;
         }
 
-        std::cout << "[24] Operador de asignacion correcto" << std::endl;
+        std::cout << "[24] Operador de asignacion correcto, TEST CORRECTO" << std::endl;
     }
 
     // Dump and load game
@@ -682,7 +682,7 @@ bool test()
             return false;
         }
 
-        std::cout << "[25] Games con distinto estado se detectan como distintos" << std::endl;
+        std::cout << "[25] Games con distinto estado se detectan como distintos, TEST CORRECTO" << std::endl;
     }
 
     return true;
