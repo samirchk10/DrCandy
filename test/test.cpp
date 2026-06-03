@@ -626,7 +626,7 @@ bool test()
         {
             return false;
         }
-        
+
         std::cout << "Constructor deep copy correcto" << std::endl;
     }
 
@@ -659,7 +659,7 @@ bool test()
         }
         Game g2;
         if (!g2.load(getDataDirPath() + "dump_game.txt"))
-        {g
+        {
             return false;
         }
         if (g != g2)
