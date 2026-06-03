@@ -208,7 +208,7 @@ bool Game::dump(const std::string& output_path) const
     {
         return false;
     }
-    std::ofstream file(output_path);
+    std::ofstream file(output_path, std::ios::app);
     if (!file.is_open()) 
     {
         return false;
@@ -243,16 +243,17 @@ bool Game::load(const std::string& input_path)
         return false;
     }
     int width, height;
+    file >> width >> height;
+    std::string cell;
+
+    for (int i = 0; i < width * height; i++)
+    {
+        file >> cell;
+    }
+
     file >> m_score >> m_frameCounter >> m_gameOver;
     file >> m_blockX >> m_blockY;
-    for (int i = 0; i < 3; i++) 
-    {
-        if (m_fallingBlock[i] != nullptr) 
-        {
-            delete m_fallingBlock[i];
-            m_fallingBlock[i] = nullptr;
-        }
-    }
+
     for (int i = 0; i < 3; i++)
     {
         char c;
@@ -264,6 +265,7 @@ bool Game::load(const std::string& input_path)
         else 
         {
             m_fallingBlock[i] = new Candy(m_board.charToType(c));
+            m_candies.push_back(m_fallingBlock[i]);
         }
     }
     file.close();
