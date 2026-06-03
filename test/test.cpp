@@ -31,11 +31,11 @@ bool test()
         
         if (b.getWidth() != DEFAULT_BOARD_WIDTH || b.getHeight() != DEFAULT_BOARD_HEIGHT)
         {
-            std::cout << "Dimensiones por defecto cargadas incorrectamente, TEST FALLIDO" << std::endl;
+            std::cout << "[1] Dimensiones por defecto cargadas incorrectamente, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Dimensiones por defecto cargadas correctamente, TEST CORRECTO" << std::endl;
+        std::cout << "[1] Dimensiones por defecto cargadas correctamente, TEST CORRECTO" << std::endl;
     }
 
     // Test dimensiones personalizadas
@@ -44,11 +44,11 @@ bool test()
 
         if (b.getWidth() != 5 || b.getHeight() != 7)
         {
-            std::cout << "Dimensiones personalizadas no cargadas, TEST FALLIDO" << std::endl;
+            std::cout << "[2] Dimensiones personalizadas no cargadas, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Dimensiones personalizadas cargadas correctamente, TEST CORRECTO" << std::endl;
+        std::cout << "[2] Dimensiones personalizadas cargadas correctamente, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si una celda nullptr no explota
@@ -57,11 +57,11 @@ bool test()
 
         if (b.shouldExplode(0, 0) != false)
         {
-            std::cout << "Celda nula explota, TEST FALLIDO" << std::endl;
+            std::cout << "[3] Celda nula explota, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Celda nula no explota, TEST CORRECTO" << std::endl;
+        std::cout << "[3] Celda nula no explota, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver que un solo caramelo no explota
@@ -73,11 +73,11 @@ bool test()
 
         if (b.shouldExplode(5, 5) != false)
         {
-            std::cout << "Candy solo explota, TEST FALLIDO" << std::endl;
+            std::cout << "[4] Candy solo explota, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Candy solo no explota, TEST CORRECTO" << std::endl;
+        std::cout << "[4] Candy solo no explota, TEST CORRECTO" << std::endl;
     }
 
 
@@ -102,11 +102,11 @@ bool test()
 
         if (b.shouldExplode(1, 0) != true)
         {
-            std::cout << "Los 3 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[5] Los 3 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 3 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[5] Los 3 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si 4 candies del mismo tipo explotan en horizontal
@@ -125,11 +125,11 @@ bool test()
 
         if (b.shouldExplode(1, 0) != true)
         {
-            std::cout << "Los 4 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[6] Los 4 candies en HORIZONTAL no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 4 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[6] Los 4 candies en HORIZONTAL explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si tres candies del mismo tipo explotan en vertical
@@ -146,11 +146,11 @@ bool test()
 
         if (b.shouldExplode(0, 1) != true)
         {
-            std::cout << "Los 3 candies en VERTICAL explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[7] Los 3 candies en VERTICAL explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 3 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[7] Los 3 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si 4 candies del mismo tipo explotan en vertical
@@ -169,11 +169,11 @@ bool test()
 
         if (b.shouldExplode(0, 1) != true)
         {
-            std::cout << "Los 4 candies en VERTICAL no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[8] Los 4 candies en VERTICAL no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 4 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[8] Los 4 candies en VERTICAL explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si tres candies del mismo tipo explotan en diagonal /
@@ -190,11 +190,11 @@ bool test()
 
         if (b.shouldExplode(2, 2) != true)
         {
-            std::cout << "Los 3 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[9] Los 3 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 3 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[9] Los 3 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si 4 candies del mismo tipo explotan en diagonal /
@@ -213,11 +213,11 @@ bool test()
 
         if (b.shouldExplode(2, 2) != true)
         {
-            std::cout << "Los 4 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[10] Los 4 candies en DIAGONAL / no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 4 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[10] Los 4 candies en DIAGONAL / explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si tres candies del mismo tipo explotan en diagonal inversa
@@ -234,11 +234,11 @@ bool test()
 
         if (b.shouldExplode(2, 2) != true)
         {
-            std::cout << "Los 3 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[11] Los 3 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 3 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[11] Los 3 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
     }
 
     // Test para ver si 4 candies del mismo tipo explotan en diagonal inversa
@@ -257,11 +257,11 @@ bool test()
 
         if (b.shouldExplode(2, 2) != true)
         {
-            std::cout << "Los 4 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[12] Los 4 candies en DIAGONAL inversa no explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 4 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[12] Los 4 candies en DIAGONAL inversa explotan, TEST CORRECTO" << std::endl;
     }
     
     // Test para ver si 3 candies, donde uno no es del mismo tipo, no explotan en diagonal inversa
@@ -278,11 +278,11 @@ bool test()
 
         if (b.shouldExplode(2, 2) != false)
         {
-            std::cout << "Los 4 candies (con uno diferente) en DIAGONAL inversa explotan, TEST FALLIDO" << std::endl;
+            std::cout << "[13] Los 4 candies (con uno diferente) en DIAGONAL inversa explotan, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Los 4 candies (con uno diferente) en DIAGONAL inversa no explotan, TEST CORRECTO" << std::endl;
+        std::cout << "[13] Los 4 candies (con uno diferente) en DIAGONAL inversa no explotan, TEST CORRECTO" << std::endl;
     }
 
 
@@ -312,7 +312,7 @@ bool test()
 
         if (static_cast<int>(exploded.size()) != 3)
         {
-            std::cout << "El tamaño del vector no es igual a 3, TEST FALLIDO" << std::endl;
+            std::cout << "[14] El tamaño del vector no es igual a 3, TEST FALLIDO" << std::endl;
             return false;
         }
 
@@ -323,11 +323,11 @@ bool test()
 
         if (exploded.empty())
         {
-            std::cout << "Devuelve un vector vacio, TEST FALLIDO" << std::endl;
+            std::cout << "[14] Devuelve un vector vacio, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << " -> Devuelve un vector con candies explotados, TEST CORRECTO" << std::endl;
+        std::cout << " [14] Devuelve un vector con candies explotados, TEST CORRECTO" << std::endl;
     }
 
 
@@ -344,11 +344,11 @@ bool test()
 
         if (!exploded.empty())
         {
-            std::cout << "Deberia devolver un vector vacio, TEST FALLIDO" << std::endl;
+            std::cout << "[15] Deberia devolver un vector vacio, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Devuelve un vector vacio, TEST CORRECTO" << std::endl;
+        std::cout << "[15] Devuelve un vector vacio, TEST CORRECTO" << std::endl;
     }
 
 
@@ -367,17 +367,17 @@ bool test()
 
         if (static_cast<int>(exploded.size()) != 3)
         {
-            std::cout << "Deberia devolver 3 candies, TEST FALLIDO" << std::endl;
+            std::cout << "[16] Deberia devolver 3 candies, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.getCell(0,9) != nullptr || b.getCell(1,9) != nullptr || b.getCell(2,9) != nullptr)
         {
-            std::cout << "Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
+            std::cout << "[16] Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "La linea de 3 candies iguales explota y las celdas quedan nullptr, TEST CORRECTO" << std::endl;
+        std::cout << "[16] La linea de 3 candies iguales explota y las celdas quedan nullptr, TEST CORRECTO" << std::endl;
     }
 
 
@@ -398,11 +398,11 @@ bool test()
 
         if (b.getCell(0, 9)->getType() != CandyType::TYPE_YELLOW)
         {
-            std::cout << "El candy amarillo no ha caido abajo despues de la explosion, TEST FALLIDO" << std::endl;
+            std::cout << "[17] El candy amarillo no ha caido abajo despues de la explosion, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "El candy amarillo ha caido abajo despues de la explosion, TEST CORRECTO" << std::endl;
+        std::cout << "[17] El candy amarillo ha caido abajo despues de la explosion, TEST CORRECTO" << std::endl;
     }
 
 
@@ -433,7 +433,7 @@ bool test()
 
         if (static_cast<int>(exploded.size()) != 6)
         {
-            std::cout << "Deberia devolver 6 candies, TEST FALLIDO" << std::endl;
+            std::cout << "[18] Deberia devolver 6 candies, TEST FALLIDO" << std::endl;
             return false;
         }
 
@@ -442,24 +442,24 @@ bool test()
         if (b.getCell(1, 9) != nullptr || b.getCell(2, 9) != nullptr || b.getCell(0, 6) != nullptr
             || b.getCell(0, 7) != nullptr || b.getCell(0, 8) != nullptr)
         {
-            std::cout << "Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
+            std::cout << "[18] Las celdas deberian quedar nullptr, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.getCell(0, 9) == nullptr || b.getCell(0, 9)->getType() != CandyType::TYPE_BLUE)
         {
-            std::cout << "El candy blue no ha caido correctament, TEST FALLIDO" << std::endl;
+            std::cout << "[18] El candy blue no ha caido correctament, TEST FALLIDO" << std::endl;
             return false;
         }
 
         //Comprobamos que la celda donde estaba antes el candyExtra, es nullptr
         if (b.getCell(0, 5) != nullptr)
         {
-            std::cout << "La celda donde estaba antes el candy blue, no ha quedado vacia, TEST FALLIDO" << std::endl;
+            std::cout << "[18] La celda donde estaba antes el candy blue, no ha quedado vacia, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Reaccion en cadena y caida correcta, TEST CORRECTO" << std::endl;
+        std::cout << "[18] Reaccion en cadena y caida correcta, TEST CORRECTO" << std::endl;
     }
     
 
@@ -476,41 +476,41 @@ bool test()
 
         if (b.typeToChar(CandyType::TYPE_RED) != 'R')
         {
-            std::cout << "typeToChar TYPE_RED falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_RED falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.typeToChar(CandyType::TYPE_BLUE) != 'B')
         {
-            std::cout << "typeToChar TYPE_BLUE falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_BLUE falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.typeToChar(CandyType::TYPE_GREEN) != 'G')
         {
-            std::cout << "typeToChar TYPE_GREEN falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_GREEN falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.typeToChar(CandyType::TYPE_YELLOW) != 'Y')
         {
-            std::cout << "typeToChar TYPE_YELLOW falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_YELLOW falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.typeToChar(CandyType::TYPE_PURPLE) != 'P')
         {
-            std::cout << "typeToChar TYPE_PURPLE falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_PURPLE falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.typeToChar(CandyType::TYPE_ORANGE) != 'O')
         {
-            std::cout << "typeToChar TYPE_ORANGE falla, TEST FALLIDO" << std::endl;
+            std::cout << "[19] typeToChar TYPE_ORANGE falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Todas las comprobaciones de typeToChar son correctas, TEST CORRECTO" << std::endl;
+        std::cout << "[19] Todas las comprobaciones de typeToChar son correctas, TEST CORRECTO" << std::endl;
     }
 
 
@@ -526,41 +526,41 @@ bool test()
 
         if (b.charToType('R') != CandyType::TYPE_RED)
         {
-            std::cout << "charToType (R) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (R) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.charToType('B') != CandyType::TYPE_BLUE)
         {
-            std::cout << "charToType (B) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (B) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.charToType('G') != CandyType::TYPE_GREEN)
         {
-            std::cout << "charToType (G) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (G) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.charToType('Y') != CandyType::TYPE_YELLOW)
         {
-            std::cout << "charToType (Y) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (Y) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.charToType('P') != CandyType::TYPE_PURPLE)
         {
-            std::cout << "charToType (P) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (P) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
         if (b.charToType('O') != CandyType::TYPE_ORANGE)
         {
-            std::cout << "charToType (O) falla, TEST FALLIDO" << std::endl;
+            std::cout << "[20] charToType (O) falla, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Todas las comprobaciones de charToType son correctas, TEST CORRECTO" << std::endl;
+        std::cout << "[20] Todas las comprobaciones de charToType son correctas, TEST CORRECTO" << std::endl;
     }
 
 
@@ -588,7 +588,7 @@ bool test()
         }
         std::filesystem::remove(getDataDirPath() + "dump_board.txt");
 
-        std::cout << "Dump and load, correcto" << std::endl;
+        std::cout << "[21] Dump and load, correcto" << std::endl;
     }
 
     // Test de load de un fichero que no existe
@@ -597,11 +597,11 @@ bool test()
 
         if (b.load("ficheroNoExiste.txt") != false)
         {
-            std::cout << "Deberia devolver false ya que no existe el fichero, TEST FALLIDO" << std::endl;
+            std::cout << "[22] Deberia devolver false ya que no existe el fichero, TEST FALLIDO" << std::endl;
             return false;
         }
 
-        std::cout << "Load devuelve false, el fichero no existe, TEST CORRECTO" << std::endl;
+        std::cout << "[22] Load devuelve false, el fichero no existe, TEST CORRECTO" << std::endl;
     }
 
 
@@ -627,7 +627,7 @@ bool test()
             return false;
         }
 
-        std::cout << "Constructor deep copy correcto" << std::endl;
+        std::cout << "[23] Constructor deep copy correcto" << std::endl;
     }
 
     // Test operadro asignacion
@@ -645,7 +645,7 @@ bool test()
             return false;
         }
 
-        std::cout << "Operador de asignacion correcto" << std::endl;
+        std::cout << "[24] Operador de asignacion correcto" << std::endl;
     }
 
     // Dump and load game
@@ -669,6 +669,7 @@ bool test()
         std::filesystem::remove(getDataDirPath() + "dump_game.txt");
     }
 
+    // Test que comprueba que dos games son distintos
     {
         Game g1;
         Game g2;
@@ -680,8 +681,8 @@ bool test()
         {
             return false;
         }
-        
-        std::cout << "Games con distinto estado se detectan como distintos" << std::endl;
+
+        std::cout << "[25] Games con distinto estado se detectan como distintos" << std::endl;
     }
 
     return true;
