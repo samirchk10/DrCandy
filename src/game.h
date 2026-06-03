@@ -8,6 +8,12 @@
 #include "graphics.h"
 #include "controller.h"
 
+const int BLOCK_SIZE = 3;
+const int NUM_CANDY_TYPES = 6;
+const int FRAMES_PER_DROP = 60;
+const int INITIAL_BLOCK_X = 5;
+const int INITIAL_BLOCK_Y = -1;
+
 /**
  * Main game class: keep track of the game state it. 
  * When run_graphic_game() is called, the game loop will call
@@ -61,7 +67,7 @@ class Game
         int m_score;
         bool m_gameOver;
 
-        Candy* m_fallingBlock[3];
+        Candy* m_fallingBlock[BLOCK_SIZE];
         int m_blockX;
         int m_blockY;
 
