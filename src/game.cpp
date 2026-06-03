@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "candy.h"
 #include <fstream>
+#include "util.h"
 
 Game::Game() : m_frameCounter(0), m_score(0), m_gameOver(false)
 {
@@ -129,6 +130,10 @@ void Game::update(const Controller& controller)
         if (controller.isKey1Pressed())
         {
             rotateBlock();
+        }
+        if (controller.isKey2Pressed())
+        {
+            dump(getDataDirPath() + "/save.txt");
         }
 
         if (m_frameCounter % 60 == 0)
