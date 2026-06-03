@@ -2,6 +2,7 @@
 #include <random>
 #include "graphics.h"
 #include "candy.h"
+#include <fstream>
 
 Game::Game() : m_frameCounter(0), m_score(0), m_gameOver(false)
 {
@@ -207,7 +208,7 @@ bool Game::dump(const std::string& output_path) const
     {
         return false;
     }
-    std::ofstream file(output_path, std::ios::app);
+    std::ofstream file(output_path);
     if (!file.is_open()) 
     {
         return false;
@@ -266,7 +267,7 @@ bool Game::load(const std::string& input_path)
         }
     }
     file.close();
-    return True();
+    return true;
 }
 
 bool Game::operator==(const Game& other) const
