@@ -10,7 +10,6 @@
 #include <iostream>
 #include <fstream>
 
-// Inicializa el tablero con las dimensiones dadas, y a su vez inicializa el tablero rellenando con nullptr
 Board::Board(int width, int height) : m_width(width), m_height(height) 
 { 
     init(); 
@@ -21,7 +20,6 @@ Board::Board(const Board& b)
     copyFrom(b);
 }
 
-// Esto no hace falta implementarlo aun
 Board::~Board()
 {
     clear();
@@ -29,7 +27,7 @@ Board::~Board()
 
 Board& Board::operator=(const Board& b)
 {
-    if (this != &b) // Para evitar asignarse a el mismo
+    if (this != &b)
     {
         clear();
         copyFrom(b);
@@ -80,13 +78,11 @@ Candy* Board::getCell(int x, int y) const
 {
     Candy* candy = nullptr;
 
-    // Si las coordenadas estan dentro del tablero, asignamos a candy la celda pertinente
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
         candy = m_board[y * m_width + x];
     }
 
-    // Devuelve Candy* (la dirección de memoria) de las coordenadas dadas
     return candy;
 }
 
@@ -95,7 +91,6 @@ void Board::setCell(Candy* candy, int x, int y)
 {
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
-        // candy ya es un puntero, ya que tenemos "Candy* candy" como parametro
         m_board[y * m_width + x] = candy;
     }
 }
@@ -114,21 +109,17 @@ int Board::getHeight() const
 
 bool Board::checkMatchDirection(int x, int y, CandyType initialType, int stepX, int stepY) const
 {
-    // Contador para los candies que coinciden uno tras otro
     int matchCount = INITIAL_COUNT;
 
-    // En la primera iteracion verificará correspondencias en un sentido, en la segunda, en el sentido contrario
     for (int dir = -1; dir <= 1; dir += 2)
     {    
         bool stop = false;
 
-        // Empieza en i = 1 para empezar un paso adelante del candy principal
         for (int i = 1; !stop; i++)
         {
-            // Candy de al lado en la dirección dada a 'i' pasos de distancia
             Candy* nearCandy = getCell(x + i * dir * stepX, y + i * dir * stepY);
             
-            if (nearCandy != nullptr && initialType == nearCandy->getType()) // la "->" es lo mismo que hacer (*nearCandy).getType()
+            if (nearCandy != nullptr && initialType == nearCandy->getType())
             {
                 matchCount++;
             }
@@ -139,14 +130,12 @@ bool Board::checkMatchDirection(int x, int y, CandyType initialType, int stepX, 
         }
     }
 
-    // Devuelve true en caso de que el matchCount sea igual o mayor a 3
     return matchCount >= SHORTEST_EXPLOSION_LINE;
 }
 
 
 bool Board::shouldExplode(int x, int y) const
 {
-    // Devolver false si las coordenadas dadas son negativas, estan fuera del tablero o son las de una celda vacia nullptr
     if (x < 0 || x >= m_width || y < 0 || y >= m_height || m_board[y * m_width + x] == nullptr)
     {
         return false;
@@ -181,21 +170,17 @@ bool Board::shouldExplode(int x, int y) const
 
 std::vector<Candy*> Board::explodeAndDrop()
 {
-    // Acumula los candies que tienen que explotar
     std::vector<Candy*> explodedCandies;
 
     bool exploded = true;
 
-    // Mientras exploded sea true
     while (exploded)
     {
         exploded = false;
 
-        // Vectores para separar tanto la coordenada 'x' y la 'y' de los candies a explotar
         std::vector<int> toExplodeX;
         std::vector<int> toExplodeY;
 
-        // Si el candy debe explotar, guardar las coordenadas por separado en los dos vectores toExplodeX y toExplodeY
         for (int y = 0; y < m_height; y++)
         {
             for (int x = 0; x < m_width; x++)
@@ -208,7 +193,6 @@ std::vector<Candy*> Board::explodeAndDrop()
             }
         }
 
-        // Este bucle se encarga de añadir al vector explodedCandies los candies que tienen que explotar y posteriormente los convierte en nullptr dentro de m_cells
         for (int i = 0; i < static_cast<int>(toExplodeX.size()); i++)
         {
             explodedCandies.push_back(m_board[toExplodeY[i] * m_width + toExplodeX[i]]);
@@ -219,30 +203,22 @@ std::vector<Candy*> Board::explodeAndDrop()
 
         if (exploded)
         {
-            // Los caramelos bajan en vertical, primero hay que saber que caramelos bajaran, recogiendolos fila por fila
             for (int x = 0; x < m_width; x++)
             {
-                // Recoger caramelos de las diferentes columnas en un vector
                 std::vector<Candy*> columnCandies;
 
-                // Se recogen candies de abajo a arriba
                 for (int y = m_height - 1; y >= 0; y--)
                 {
-                    // Todos los que no sean nullptr, se van guardando en el vector columnCandies
                     if (m_board[y * m_width + x] != nullptr)
                     {
                         columnCandies.push_back(m_board[y * m_width + x]);
                     }
                 }
 
-                // Bajar caramelos y poner nullptr en las posiciones que queden vacias por encima
                 for (int y = m_height - 1; y >= 0; y--)
                 {
-                    int i = m_height - 1 - y; // Para ir bajando una posicion en la columna en cada iteración
+                    int i = m_height - 1 - y; 
 
-                    // Mientras i (que representa el valor 0 en height (y) en la primera iteracion, y va incrementando hasta llegar al indice 9)
-                    // sea menor que el tamaño del vector que guarda los candies de la columna, modifica m_cells con el valor correspondiente, ya
-                    // sea un candy, o un nullptr
                     if (i < static_cast<int>(columnCandies.size()))
                     {
                         m_board[y * m_width + x] = columnCandies[i];
@@ -256,11 +232,9 @@ std::vector<Candy*> Board::explodeAndDrop()
         }
     }
 
-    // Devuelve el vector  de punteros candy con los candies explotados
     return explodedCandies;
 }
 
-// Para dado un tipo de candy, obtener su inicial 
 char Board::typeToChar(CandyType type) const
 {   
     switch (type)
@@ -282,7 +256,6 @@ char Board::typeToChar(CandyType type) const
     }
 }
 
-// Para dado una inicial de un tipo de candy, obtener el tipo
 CandyType Board::charToType(char c) const
 {
     switch (c)
@@ -300,32 +273,22 @@ CandyType Board::charToType(char c) const
         case 'O' :
             return CandyType::TYPE_ORANGE;
         default :
-            // Ultimo valor del enum de CandyType, usado como valor invalido (caracter desconocido en este caso), devolveria el numero
-            // 6, ya que es el numero de tipos que hay en el enum
             return CandyType::COUNT;
     }
 }
 
-// Guarda el estado del tablero
 bool Board::dump(const std::string& output_path) const
 {
-    // Crea un objeto file, que es un fichero de escritura
     std::ofstream file;
-    // Lo abre en la ruta dada como parametro
     file.open(output_path);
 
-    // Si no se abre el fichero, devolver false
     if (!file.is_open())
     {
         return false;
     }
 
-    // Apuntar la anchura y la altura del tablero
     file << m_width << " " << m_height << "\n";
 
-
-    // Escribirá un punto por cada nullptr que encuentre en m_cells, y en caso contrario, escribirá la inicial del
-    // tipo de candy que encuentre. En cada iteracion de y, se hace un salto de linea al acabar el for interior de x
     for (int y = 0; y < m_height; y++)
     {
         for (int x = 0; x < m_width; x++)
@@ -343,16 +306,12 @@ bool Board::dump(const std::string& output_path) const
     }
     file.close();
 
-    // Si todo va bien, devuelve true
     return true;
 }
 
-// Carga el fichero y reconstruye el tablero. Pasar la referencia del input path es util para no copiar un objeto que puede ser bastante grande
 bool Board::load(const std::string& input_path)
 {
-    // Crea un objeto file (fichero de lectura)
     std::ifstream file;
-    // Lo abre en la ruta dada
     file.open(input_path);
 
     if (!file.is_open())
@@ -360,12 +319,9 @@ bool Board::load(const std::string& input_path)
         return false;
     }
     
-    // Libera toda la memoria reservada por Board, los candies creados con new y el array de celdas
     clear();
 
-    // Leemos las dimensiones que guardamos en el fichero
     file >> m_width >> m_height;
-    // Inicializamos tablero con las casillas rellenadas con nullptr, con espacio reservado previamente para los candies
     init();
 
     for (int y = 0; y < m_height; y++)
@@ -373,7 +329,6 @@ bool Board::load(const std::string& input_path)
         for (int x = 0; x < m_width; x++)
         {
             char c;
-            // Lee el caracter del fichero en cada iteracion y lo guarda en c
             file >> c;
 
             if (c != '.')

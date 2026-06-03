@@ -25,19 +25,15 @@ Game::~Game()
 
 void Game::spawnBlock()
 {
-    // Donde inicia el bloque 
     m_blockX = INITIAL_BLOCK_X;
     m_blockY = INITIAL_BLOCK_Y;
 
-    // Creamos 3 candies aleatorios y registramos en m_candies que esos candies han estado creados por Game
     for (int i = 0; i < BLOCK_SIZE; i++)
     {
         m_fallingBlock[i] = new Candy(static_cast<CandyType>(rand() % NUM_CANDY_TYPES));
         m_candies.push_back(m_fallingBlock[i]);
     }
 
-
-    // Si la celda por donde entra el bloque (columan 5 fila 0) esta ocupada, es gameover, el bloque no puede bajar.
     if (m_board.getCell(m_blockX, 0) != nullptr)
     {
         m_gameOver = true;
@@ -188,9 +184,7 @@ void Game::render(GraphicManager& graphics)
         }
     }
 
-    // Title [draw images]
     graphics.drawImage("img/logo_small.png", 10, 10);
-    // Score and footer [draw text]
     graphics.drawText("Movement: [Up] [Down] [Left] [Right]  --  "
                       "Buttons: [Q] [W] [E]  --  Exit [ESC]",
                       25, 700, 20, 100, 100, 100);
@@ -213,13 +207,17 @@ bool Game::dump(const std::string& output_path) const
     {
         return false;
     }
+
     std::ofstream file(output_path, std::ios::app);
+
     if (!file.is_open()) 
     {
         return false;
     }
+
     file << m_score << " " << m_frameCounter << " " << m_gameOver << "\n";
     file << m_blockX << " " << m_blockY << "\n";
+
     for (int i = 0; i < BLOCK_SIZE; i++) 
     {
         if (m_fallingBlock[i] == nullptr) 
@@ -233,6 +231,7 @@ bool Game::dump(const std::string& output_path) const
     }
     file << "\n";
     file.close();
+
     return true;
 }
 
@@ -242,11 +241,14 @@ bool Game::load(const std::string& input_path)
     {
         return false;
     }
+
     std::ifstream file(input_path);
+
     if (!file.is_open()) 
     {
         return false;
     }
+
     int width, height;
     file >> width >> height;
     std::string cell;
@@ -274,6 +276,7 @@ bool Game::load(const std::string& input_path)
         }
     }
     file.close();
+
     return true;
 }
 
