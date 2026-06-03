@@ -669,5 +669,20 @@ bool test()
         std::filesystem::remove(getDataDirPath() + "dump_game.txt");
     }
 
+    {
+        Game g1;
+        Game g2;
+        Controller cont;
+
+        g2.update(cont);
+
+        if (g1 == g2)
+        {
+            return false;
+        }
+        
+        std::cout << "Games con distinto estado se detectan como distintos" << std::endl;
+    }
+
     return true;
 }
