@@ -147,6 +147,7 @@ private:
     // Guarda la altura del tablero
     int m_height;
     
+    /// Primer ejemplo de buen uso de nuevos conceptos. Doble puntero, array de punteros a Candy
     // Array dinamico a punteros de candy, cada casilla es un puntero a candy (Candy*) o nullptr
     Candy** m_board;
 

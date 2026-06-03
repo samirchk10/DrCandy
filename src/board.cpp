@@ -15,16 +15,19 @@ Board::Board(int width, int height) : m_width(width), m_height(height)
     init(); 
 }
 
+/// Segundo ejemplo de buen uso de nuevos conceptos. Constructor de copia, deep copy
 Board::Board(const Board& b)
 {
     copyFrom(b);
 }
 
+/// Tercer ejemplo de buen uso de nuevos conceptos. Destructor con gestion de memoria
 Board::~Board()
 {
     clear();
 }
 
+/// Cuarto ejemplo de buen uso de nuevos conceptos. Operador asignacion q libera con clear y copia con el metodo copyFrom
 Board& Board::operator=(const Board& b)
 {
     if (this != &b)
@@ -36,6 +39,7 @@ Board& Board::operator=(const Board& b)
     return *this;
 }
 
+/// Quinto ejemplo de buen uso de nuevos conceptos. Memoria dinamica, creacion de una array en el heap
 void Board::init()
 {
     m_board = new Candy*[m_width * m_height];
