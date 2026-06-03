@@ -604,7 +604,6 @@ bool test()
         std::cout << "Load devuelve false, el fichero no existe, TEST CORRECTO" << std::endl;
     }
 
-/*
     // Dump and load game
     {
         Game g;
@@ -625,7 +624,6 @@ bool test()
         }
         std::filesystem::remove(getDataDirPath() + "dump_game.txt");
     }
-*/
 
     return true;
 }
