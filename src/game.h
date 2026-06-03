@@ -1,7 +1,7 @@
 /**
  * FICHERO game.h
  * AUTORES Alan Tchertchessov, Samir Channagui
- * FECHA 24/03/2026
+ * FECHA 04/06/2026
  * Declaracion de la clase Game: logica y renderizado del juego
  */
 
