@@ -1,6 +1,10 @@
 /**
- * Game logic and rendering implementation. 
+ * FICHERO game.h
+ * AUTORES Alan Tchertchessov, Samir Channagui
+ * FECHA 24/03/2026
+ * Declaracion de la clase Game: logica y renderizado del juego
  */
+
 #ifndef GAME_H
 #define GAME_H
 
@@ -22,8 +26,10 @@ const int INITIAL_BLOCK_Y = -1;
 class Game
 {
     public:
+        /// Constructor por defecto: inicializa el estado y crea el primer bloque
         Game();
 
+        /// Destructor: libera todos los candies creados por Game
         ~Game();
 
         /// Run the game loop
@@ -73,10 +79,19 @@ class Game
 
         std::vector<Candy*> m_candies;
 
+        /// Crea un nuevo bloque de candies aleatorios en la posicion inicial
         void spawnBlock();
+
+        /// @return true si el bloque puede bajar una posicion mas
         bool canFall() const;
+
+        /// Aterriza el bloque en el tablero, explota lineas y crea uno nuevo
         void landBlock();
+
+        /// @param newX columna destino. @return true si el bloque cabe ahi
         bool canMoveTo(int newX) const;
+
+        /// Rota el orden de los candies del bloque
         void rotateBlock();
 
 };
