@@ -604,6 +604,50 @@ bool test()
         std::cout << "Load devuelve false, el fichero no existe, TEST CORRECTO" << std::endl;
     }
 
+
+
+    // Test constructor copia Deep Copy
+    {
+        Board original(10, 10);
+        Candy candy(CandyType::TYPE_RED);
+        original.setCell(&candy, 0, 0);
+
+        Board copia = original;
+
+        Candy* a = original.getCell(0, 0);
+        Candy* b = copia.getCell(0, 0);
+
+        if (b == nullptr || b->getType() != CandyType::TYPE_RED)
+        {
+            return false;
+        }
+   
+        if (a == b)
+        {
+            return false;
+        }
+        
+        std::cout << "Constructor deep copy correcto" << std::endl;
+    }
+
+    // Test operadro asignacion
+    {
+        Board original(10, 10);
+        Candy candy(CandyType::TYPE_GREEN);
+        original.setCell(&candy, 2, 3);
+
+        Board asignada(10, 10);
+        asignada = original;
+
+        Candy* b = asignada.getCell(2, 3);
+        if (b == nullptr || b->getType() != CandyType::TYPE_GREEN)
+        {
+            return false;
+        }
+
+        std::cout << "Operador de asignacion correcto" << std::endl;
+    }
+
     // Dump and load game
     {
         Game g;
